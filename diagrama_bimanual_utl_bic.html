@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrama Bimanual - Formato Industrial Estándar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background: #f0f0f0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .industrial-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border: 1px solid #ccc;
+        }
+        
+        .document-header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 3px solid #e74c3c;
+        }
+        
+        .document-header h1 {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        
+        .section {
+            border: 1px solid #ddd;
+            margin: -1px 0 0 -1px;
+        }
+        
+        .section-header {
+            background: #34495e;
+            color: white;
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 14px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .subsection {
+            border-bottom: 1px solid #eee;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            min-height: 36px;
+        }
+        
+        .subsection:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .subsection-label {
+            font-weight: bold;
+            min-width: 180px;
+            color: #2c3e50;
+        }
+        
+        .subsection-content {
+            flex: 1;
+            padding-left: 10px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .bimanual-section {
+            grid-column: 1 / -1;
+            border: 1px solid #ddd;
+            margin: -1px 0 0 -1px;
+        }
+        
+        .bimanual-header {
+            background: #2c3e50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .bimanual-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            min-height: 300px;
+        }
+        
+        .hand-column {
+            padding: 15px;
+            border-right: 1px solid #ddd;
+        }
+        
+        .hand-column:last-child {
+            border-right: none;
+        }
+        
+        .hand-header {
+            background: #e74c3c;
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        
+        .center-column {
+            background: #ecf0f1;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        .center-item {
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .center-item .label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .center-item .value {
+            background: white;
+            border: 1px solid #bdc3c7;
+            padding: 8px 12px;
+            min-width: 120px;
+            text-align: center;
+            border-radius: 4px;
+        }
+        
+        .action-item {
+            margin-bottom: 15px;
+        }
+        
+        .action-label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .action-content {
+            background: white;
+            border: 1px solid #bdc3c7;
+            padding: 8px;
+            min-height: 30px;
+            border-radius: 4px;
+        }
+        
+        .footer-section {
+            grid-column: 1 / -1;
+            border: 1px solid #ddd;
+            margin: -1px 0 0 -1px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        
+        .footer-item {
+            padding: 10px 15px;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .footer-item:nth-child(even) {
+            border-right: none;
+        }
+        
+        .footer-label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+        
+        .footer-content {
+            background: white;
+            border: 1px solid #bdc3c7;
+            padding: 6px 10px;
+            min-height: 28px;
+            border-radius: 3px;
+        }
+        
+        .controls {
+            grid-column: 1 / -1;
+            padding: 20px;
+            text-align: center;
+            background: #ecf0f1;
+            border-top: 1px solid #ddd;
+        }
+        
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        .btn-secondary {
+            background: #2c3e50;
+        }
+        
+        .btn-secondary:hover {
+            background: #1a252f;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .industrial-container {
+                box-shadow: none;
+                border: 1px solid #000;
+            }
+            
+            .btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="industrial-container">
+        <div class="document-header">
+            <h1>DIAGRAMA MANO DERECHA - MANO IZQUIERDA</h1>
+        </div>
+        
+        <div class="main-grid">
+            <div class="section">
+                <div class="section-header">OBJETIVO Y NIVEL DE ANÁLISIS</div>
+                <div class="subsection">
+                    <div class="subsection-label">OPERADO</div>
+                    <div class="subsection-content">
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox"> OPERARIO
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox"> MATERIAL
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox"> EQUIPO
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-header">RESUMEN</div>
+                <div class="subsection">
+                    <div class="subsection-label">ACTIVIDAD</div>
+                    <div class="subsection-content">Social</div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-label">FINANCIADO</div>
+                    <div class="subsection-content"></div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-label">FECHA</div>
+                    <div class="subsection-content">1/4/2021</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="subsection">
+                    <div class="subsection-label">FONDO ANALIZADOR</div>
+                    <div class="subsection-content">○</div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-label">MÉTODO ACTUAL/PROPUESTO</div>
+                    <div class="subsection-content">○</div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-label">LOGOTÁSCULO</div>
+                    <div class="subsection-content">○</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="subsection">
+                    <div class="subsection-label">OPERADOR IPD</div>
+                    <div class="subsection-content">Distancia IPD</div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-label"></div>
+                    <div class="subsection-content">Control (IPD)</div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-label">ELABORADO POR</div>
+                    <div class="subsection-content">Focus</div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-label">AGOSTO</div>
+                    <div class="subsection-content">Focus</div>
+                </div>
+            </div>
+            
+            <div class="bimanual-section">
+                <div class="bimanual-header">ANÁLISIS BIMANUAL</div>
+                <div class="bimanual-grid">
+                    <div class="hand-column">
+                        <div class="hand-header">MANO IZQUIERDA</div>
+                        <div class="action-item">
+                            <div class="action-label">OBJETIVO</div>
+                            <div class="action-content"></div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-label">NORMAS</div>
+                            <div class="action-content"></div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-label">VICIOSOS</div>
+                            <div class="action-content"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="center-column">
+                        <div class="center-item">
+                            <div class="label">VOLTA</div>
+                            <div class="value"></div>
+                        </div>
+                        <div class="center-item">
+                            <div class="label">NÚMERO DE PLAZAS</div>
+                            <div class="value"></div>
+                        </div>
+                        <div class="center-item">
+                            <div class="label">MÁS DE PLAZAS</div>
+                            <div class="value"></div>
+                        </div>
+                        <div class="center-item">
+                            <div class="label">DIAGRAMA NOVA</div>
+                            <div class="value"></div>
+                        </div>
+                        <div class="center-item">
+                            <div class="label">REVISOR</div>
+                            <div class="value"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="hand-column">
+                        <div class="hand-header">MANO DERECHA</div>
+                        <div class="action-item">
+                            <div class="action-label">OBJETIVO</div>
+                            <div class="action-content"></div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-label">NORMAS</div>
+                            <div class="action-content"></div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-label">VERIFICACIONES</div>
+                            <div class="action-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <div class="footer-grid">
+                    <div class="footer-item">
+                        <div class="footer-label">REGISTRAR INFORMACIÓN</div>
+                        <div class="footer-content"></div>
+                    </div>
+                    <div class="footer-item">
+                        <div class="footer-label">RESULTAR</div>
+                        <div class="footer-content"></div>
+                    </div>
+                    <div class="footer-item">
+                        <div class="footer-label">INICIO DE RESPUESTA</div>
+                        <div class="footer-content"></div>
+                    </div>
+                    <div class="footer-item">
+                        <div class="footer-label">COMUNIDADES</div>
+                        <div class="footer-content"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button class="btn" onclick="window.print()">IMPRIMIR DIAGRAMA</button>
+                <button class="btn btn-secondary">GUARDAR DATOS</button>
+                <button class="btn btn-danger">LIMPIAR FORMULARIO</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Funcionalidad básica para guardar datos
+        function saveData() {
+            alert('Datos guardados correctamente');
+        }
+        
+        function clearForm() {
+            if (confirm('¿Está seguro de que desea limpiar todo el formulario?')) {
+                document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                
+                document.querySelectorAll('.subsection-content, .action-content, .footer-content, .value').forEach(element => {
+                    if (!element.classList.contains('subsection-content') || 
+                        !element.textContent.trim().match(/^(Social|1\/4\/2021|Focus|Distancia IPD|Control \(IPD\))$/)) {
+                        element.textContent = '';
+                    }
+                });
+            }
+        }
+        
+        // Asignar eventos a los botones
+        document.querySelector('.btn-secondary').addEventListener('click', saveData);
+        document.querySelector('.btn-danger').addEventListener('click', clearForm);
+    </script>
+</body>
+</html>
