@@ -3,87 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kahoot Style - Estudio del Trabajo</title>
+    <title>Kahoot - Estudio del Trabajo</title>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .login-screen {
-            padding: 60px 40px;
-            text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .login-form {
-            max-width: 400px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            color: #333;
-        }
-
-        .login-form input {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        .login-form input:focus {
-            border-color: #667eea;
-            outline: none;
-        }
-
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin: 10px;
-        }
-
-        .btn-primary {
-            background: #3498db;
-            color: white;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Resto del CSS se mantiene igual */
+        /* Todo el CSS anterior se mantiene igual */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #333; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); overflow: hidden; }
+        .login-screen { padding: 60px 40px; text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .login-form { max-width: 400px; margin: 0 auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); color: #333; }
+        .login-form input { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; transition: border-color 0.3s; }
+        .login-form input:focus { border-color: #667eea; outline: none; }
+        .btn { padding: 15px 30px; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; transition: all 0.3s; margin: 10px; }
+        .btn-primary { background: #3498db; color: white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         .game-screen { display: none; min-height: 600px; }
         .results-screen { display: none; padding: 40px; text-align: center; }
         .header { background: #2c3e50; color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
@@ -94,7 +28,7 @@
         .question-text { font-size: 28px; font-weight: bold; color: #2c3e50; margin-bottom: 30px; line-height: 1.4; }
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto; }
         .option { padding: 25px; border-radius: 15px; font-size: 18px; font-weight: bold; cursor: pointer; transition: all 0.3s; border: 3px solid transparent; color: white; text-align: center; }
-        .option:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
+        .option:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .option-a { background: #e74c3c; }
         .option-b { background: #3498db; }
         .option-c { background: #2ecc71; }
@@ -109,7 +43,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Pantalla de Login -->
         <div class="login-screen" id="loginScreen">
             <h1>🎯 Kahoot - Estudio del Trabajo</h1>
             <p class="subtitle">Demuestra tus conocimientos y compite con tus compañeros</p>
@@ -119,13 +52,10 @@
                 <input type="text" id="studentName" placeholder="Tu nombre completo" maxlength="20">
                 <input type="text" id="studentId" placeholder="Matrícula" maxlength="10">
                 <button class="btn btn-primary" onclick="registerStudent()">¡Comenzar Juego!</button>
-                
-                <!-- Estado de Firebase -->
                 <div id="firebaseStatus" style="margin-top: 15px; font-size: 12px; color: #666;"></div>
             </div>
         </div>
 
-        <!-- Pantalla de Juego -->
         <div class="game-screen" id="gameScreen">
             <div class="header">
                 <div class="player-info">
@@ -157,7 +87,6 @@
             </div>
         </div>
 
-        <!-- Pantalla de Resultados -->
         <div class="results-screen" id="resultsScreen">
             <div class="results-header">
                 <h1>🏆 ¡Juego Terminado!</h1>
@@ -169,9 +98,7 @@
 
             <h2>🏅 Ranking de la Clase</h2>
             <div class="ranking" id="rankingList">
-                <div class="ranking-item">
-                    <div>Cargando ranking...</div>
-                </div>
+                <div class="ranking-item"><div>Cargando ranking...</div></div>
             </div>
 
             <div style="margin-top: 30px;">
@@ -182,14 +109,15 @@
     </div>
 
     <script>
-        // 🔥 CONFIGURACIÓN FIREBASE - REEMPLAZA CON TUS DATOS REALES
+        // ✅ USA TU CONFIGURACIÓN REAL DE FIREBASE
         const firebaseConfig = {
-            apiKey: "AIzaSyABCDEFGHIJKLMNOPQRSTUVWXYZ123456789",
-            authDomain: "kahoot-estudio-trabajo.firebaseapp.com",
-            projectId: "kahoot-estudio-trabajo",
-            storageBucket: "kahoot-estudio-trabajo.appspot.com",
-            messagingSenderId: "123456789012",
-            appId: "1:123456789012:web:abcdef123456789"
+            apiKey: "AIzaSyDm385YCrTr_Ayzdkm6pSUC8BDtIz5aYys",
+            authDomain: "evaluacionfinalcurso-f3f5b.firebaseapp.com",
+            projectId: "evaluacionfinalcurso-f3f5b",
+            storageBucket: "evaluacionfinalcurso-f3f5b.firebasestorage.app",
+            messagingSenderId: "275243119732",
+            appId: "1:275243119732:web:ecce0263523f8b1e4a0d21",
+            measurementId: "G-V3JZVEEFM4"
         };
 
         // Inicializar Firebase
@@ -199,11 +127,12 @@
         // Verificar conexión
         db.collection('test').doc('connection').set({
             timestamp: new Date(),
-            status: 'connected'
+            status: 'connected',
+            project: 'evaluacionfinalcurso-f3f5b'
         }).then(() => {
-            document.getElementById('firebaseStatus').innerHTML = '✅ Firebase conectado correctamente';
+            document.getElementById('firebaseStatus').innerHTML = '✅ Firebase conectado correctamente a tu proyecto';
         }).catch((error) => {
-            document.getElementById('firebaseStatus').innerHTML = '❌ Error conectando a Firebase: ' + error.message;
+            document.getElementById('firebaseStatus').innerHTML = '❌ Error: ' + error.message;
         });
 
         // Variables del juego
@@ -215,7 +144,7 @@
         let timerInterval;
         let questions = [];
 
-        // Banco de preguntas completo (30 preguntas)
+        // Banco de preguntas completo
         const questionBank = [
             {
                 question: "¿Cuál de las siguientes áreas del IISE se enfoca en la disposición física de recursos?",
@@ -277,15 +206,12 @@
                 // Guardar en Firebase
                 await db.collection('players').doc(id).set(currentPlayer);
                 
-                // Iniciar juego
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('gameScreen').style.display = 'block';
                 
-                // Actualizar interfaz
                 document.getElementById('playerName').textContent = name;
                 document.getElementById('playerAvatar').textContent = currentPlayer.avatar;
                 
-                // Mezclar preguntas y comenzar
                 questions = [...questionBank].sort(() => Math.random() - 0.5);
                 loadQuestion();
                 
@@ -306,7 +232,6 @@
             document.getElementById('questionNumber').textContent = `Pregunta #${currentQuestion + 1}`;
             document.getElementById('questionCounter').textContent = `Pregunta ${currentQuestion + 1}/${questions.length}`;
 
-            // Actualizar opciones
             const options = document.querySelectorAll('.option');
             options.forEach((opt, index) => {
                 const letter = String.fromCharCode(97 + index);
@@ -316,7 +241,6 @@
                 opt.style.pointerEvents = 'auto';
             });
 
-            // Reiniciar selección y timer
             selectedOption = null;
             document.getElementById('submitBtn').disabled = true;
             resetTimer();
@@ -454,7 +378,6 @@
             showPerformanceMessage();
             showAchievements();
             loadRanking();
-            loadQuestionStats();
         }
 
         // Mensaje de desempeño
@@ -527,28 +450,8 @@
                 });
         }
 
-        // Estadísticas de preguntas
-        function loadQuestionStats() {
-            db.collection('answers')
-                .get()
-                .then(snapshot => {
-                    const stats = {};
-                    snapshot.forEach(doc => {
-                        const answer = doc.data();
-                        if (!stats[answer.questionIndex]) {
-                            stats[answer.questionIndex] = { total: 0, correct: 0 };
-                        }
-                        stats[answer.questionIndex].total++;
-                        if (answer.isCorrect) {
-                            stats[answer.questionIndex].correct++;
-                        }
-                    });
-                    console.log('Estadísticas:', stats);
-                });
-        }
-
         function showQuestionStats() {
-            alert('Estadísticas guardadas en Firebase. Revisa la consola del navegador.');
+            alert('Las estadísticas se están guardando en tu base de datos de Firebase.');
         }
 
         // Reiniciar juego
