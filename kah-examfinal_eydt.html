@@ -7,163 +7,138 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background: #46178f; color: #333; min-height: 100vh; padding: 20px; }
-        .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 15px; overflow: hidden; }
-        
-        /* Pantallas */
-        .screen { display: none; padding: 30px; }
-        .active { display: block; }
-        
-        /* Login Screen */
-        .login-screen { text-align: center; background: #46178f; color: white; }
-        .login-form { max-width: 400px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; color: #333; }
-        .login-form input { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
-        .login-form input:focus { border-color: #46178f; outline: none; }
-        
-        /* Moderador Screen */
-        .moderator-screen { text-align: center; }
-        .game-code { font-size: 48px; font-weight: bold; color: #46178f; margin: 20px 0; letter-spacing: 5px; }
-        .players-waiting { max-width: 600px; margin: 20px auto; }
-        .player-card { display: inline-block; background: #f0f0f0; padding: 15px; margin: 10px; border-radius: 10px; text-align: center; min-width: 120px; }
-        .player-avatar { width: 50px; height: 50px; border-radius: 50%; background: #ffcd00; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #46178f; }
-        
-        /* Waiting Screen (para estudiantes) */
-        .waiting-screen { text-align: center; background: #46178f; color: white; }
-        .waiting-code { font-size: 48px; font-weight: bold; color: #ffcd00; margin: 20px 0; letter-spacing: 5px; }
-        
-        /* Game Screen */
-        .game-screen { padding: 0; }
-        .header { background: #46178f; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .player-info { display: flex; align-items: center; gap: 10px; }
-        .avatar { width: 40px; height: 40px; border-radius: 50%; background: #ffcd00; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #46178f; }
-        .score-display { font-size: 18px; font-weight: bold; color: #ffcd00; }
-        
-        .question-container { padding: 30px; text-align: center; }
-        .question-text { font-size: 24px; font-weight: bold; color: #333; margin-bottom: 20px; }
-        
-        .timer-bar { height: 8px; background: #ddd; margin: 15px 0; border-radius: 4px; overflow: hidden; }
-        .timer-progress { height: 100%; background: #46178f; width: 100%; transition: width 1s linear; }
-        
-        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; max-width: 800px; margin: 0 auto 20px; }
-        .option { padding: 20px; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; border: 3px solid transparent; color: white; text-align: center; }
-        .option-a { background: #e74c3c; }
-        .option-b { background: #3498db; }
-        .option-c { background: #2ecc71; }
-        .option-d { background: #f39c12; }
-        .option:hover { transform: scale(1.05); }
-        .option.selected { border-color: white; box-shadow: 0 0 10px rgba(255,255,255,0.5); }
-        
-        .btn { padding: 12px 30px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin: 10px; background: #46178f; color: white; }
-        .btn-success { background: #27ae60; }
-        .btn-danger { background: #e74c3c; }
-        .btn:disabled { background: #ccc; cursor: not-allowed; }
-        
-        .correct-answer { background: #27ae60 !important; }
-        .incorrect-answer { background: #e74c3c !important; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-        /* Status de Firebase */
-        .firebase-status { 
-            background: #f8f9fa; 
-            padding: 10px; 
-            margin: 10px 0; 
-            border-radius: 5px; 
-            font-size: 14px; 
-            color: #666;
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .login-screen {
+            padding: 60px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .login-form input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .status-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Pantalla de Login -->
-        <div class="screen login-screen active" id="loginScreen">
+        <div class="login-screen" id="loginScreen">
             <h1>🎯 Kahoot - Estudio del Trabajo</h1>
-            <p>Demuestra tus conocimientos y compite con tus compañeros</p>
+            <p class="subtitle">Demuestra tus conocimientos y compite con tus compañeros</p>
             
             <div class="login-form">
-                <h2>Unirse al Juego</h2>
-                <input type="text" id="gameCodeInput" placeholder="Código del juego" value="KAH123">
-                <input type="text" id="studentName" placeholder="Tu nombre completo" value="FAUSTO NOE JIMENEZ">
-                <input type="text" id="studentId" placeholder="Matrícula" value="1665">
-                <div class="firebase-status" id="firebaseStatus">🔵 Conectando a Firebase...</div>
-                <button class="btn" onclick="joinAsStudent()" style="width: 100%; margin: 10px 0;">🎮 UNIRSE AL JUEGO</button>
-                <button class="btn btn-success" onclick="joinAsModerator()" style="width: 100%;">👨‍🏫 SOY EL MODERADOR</button>
-            </div>
-        </div>
-
-        <!-- Pantalla de Moderador -->
-        <div class="screen moderator-screen" id="moderatorScreen">
-            <h1>👨‍🏫 Panel de Moderador</h1>
-            <p>Comparte este código con los estudiantes:</p>
-            <div class="game-code" id="moderatorGameCode">KAH123</div>
-            
-            <div class="players-waiting">
-                <h3>Jugadores en espera: <span id="playersCount">0</span></h3>
-                <div id="playersList">
-                    <div style="color: #666; padding: 20px;">Esperando jugadores...</div>
-                </div>
-            </div>
-            
-            <button class="btn btn-success" onclick="startGameAsModerator()" id="startBtn" disabled>🎮 INICIAR JUEGO</button>
-            <button class="btn btn-danger" onclick="backToLogin()">← VOLVER AL LOGIN</button>
-        </div>
-
-        <!-- Pantalla de Espera para Estudiantes -->
-        <div class="screen waiting-screen" id="waitingScreen">
-            <h1>🎯 Kahoot - Estudio del Trabajo</h1>
-            <p>Esperando a que el moderador inicie el juego...</p>
-            <div class="waiting-code" id="waitingGameCode">KAH123</div>
-            
-            <div class="players-waiting">
-                <h3>Jugadores conectados: <span id="waitingPlayersCount">0</span></h3>
-                <div id="waitingPlayersList">
-                    <div style="color: white; padding: 20px;">Cargando jugadores...</div>
-                </div>
-            </div>
-            
-            <div style="margin-top: 30px;">
-                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; display: inline-block;">
-                    🟡 Conectado - Esperando inicio del juego
-                </div>
-            </div>
-            
-            <button class="btn btn-danger" onclick="backToLogin()" style="margin-top: 20px;">← VOLVER AL LOGIN</button>
-        </div>
-
-        <!-- Pantalla de Juego -->
-        <div class="screen game-screen" id="gameScreen">
-            <div class="header">
-                <div class="player-info">
-                    <div class="avatar" id="playerAvatar">F</div>
-                    <div>
-                        <div id="playerName">FAUSTO NOE JIMENEZ</div>
-                        <div class="score-display" id="currentScore">0 puntos</div>
-                    </div>
-                </div>
-                <div id="questionCounter">Pregunta 1/5</div>
-            </div>
-
-            <div class="question-container">
-                <div class="question-text" id="questionText">¿Qué área del IISE se enfoca en el diseño de estaciones de trabajo?</div>
+                <h2>Configuración Inicial</h2>
                 
-                <div class="timer-bar">
-                    <div class="timer-progress" id="timerProgress"></div>
+                <div id="firebaseStatus" class="status-message status-warning">
+                    🔄 Inicializando Firebase...
                 </div>
 
-                <div class="options-grid">
-                    <div class="option option-a" onclick="selectOption('a')">A) Facilities Engineering</div>
-                    <div class="option option-b" onclick="selectOption('b')">B) Work Design & Measurement</div>
-                    <div class="option option-c" onclick="selectOption('c')">C) Operations Research</div>
-                    <div class="option option-d" onclick="selectOption('d')">D) Quality Engineering</div>
-                </div>
+                <h3>Registro de Estudiante</h3>
+                <input type="text" id="studentName" placeholder="Tu nombre completo" maxlength="20">
+                <input type="text" id="studentId" placeholder="Matrícula" maxlength="10">
+                <button class="btn btn-primary" onclick="registerStudent()" id="startBtn" disabled>
+                    🔄 Inicializando...
+                </button>
 
-                <button class="btn" id="submitBtn" onclick="submitAnswer()" disabled>Confirmar Respuesta</button>
+                <div style="margin-top: 20px; font-size: 12px; color: #666;">
+                    <strong>Proyecto Firebase:</strong> evaluacionfinalcurso-f3f5b
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // ✅ CONFIGURACIÓN REAL DE FIREBASE
+        // 🔥 CONFIGURACIÓN FIREBASE - TU PROYECTO REAL
         const firebaseConfig = {
             apiKey: "AIzaSyDm385YCrTr_Ayzdkm6pSUC8BDtIz5aYys",
             authDomain: "evaluacionfinalcurso-f3f5b.firebaseapp.com",
@@ -174,410 +149,175 @@
             measurementId: "G-V3JZVEEFM4"
         };
 
-        // Inicializar Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        // Variables globales
+        let db = null;
+        let firebaseInitialized = false;
 
-        // Banco de preguntas
-        const questionBank = [
-            {
-                question: "¿Qué área del IISE se enfoca en el diseño de estaciones de trabajo?",
-                options: ["Facilities Engineering", "Work Design & Measurement", "Operations Research", "Quality Engineering"],
-                correct: "b",
-                points: 100
-            },
-            {
-                question: "¿Quién es considerado el padre de la administración científica?",
-                options: ["Henry Gantt", "Frederick Taylor", "Frank Gilbreth", "Henry Ford"],
-                correct: "b", 
-                points: 100
-            },
-            {
-                question: "¿Qué representa el tiempo estándar en estudio de tiempos?",
-                options: ["Tiempo promedio", "Tiempo normal más suplementos", "Tiempo más rápido", "Tiempo más lento"],
-                correct: "b",
-                points: 150
-            },
-            {
-                question: "¿Qué técnica usa códigos predefinidos para analizar movimientos?",
-                options: ["Diagrama de flujo", "Diagrama bimanual", "MTM", "Estudio de tiempos"],
-                correct: "c",
-                points: 150
-            },
-            {
-                question: "¿Qué área utiliza modelos matemáticos para optimizar sistemas?",
-                options: ["Work Design", "Facilities Engineering", "Operations Research", "Engineering Economy"],
-                correct: "c",
-                points: 200
-            }
-        ];
-
-        // Variables del juego
-        let currentQuestion = 0;
-        let score = 0;
-        let selectedOption = null;
-        let timeLeft = 30;
-        let timerInterval;
-        let questions = [];
-        let isModerator = false;
-        let currentGameCode = '';
-        let currentPlayerId = '';
-        let gameListener = null;
-        let playersListener = null;
-
-        // Verificar conexión a Firebase
-        db.collection('connection_test').doc('test').set({
-            timestamp: new Date(),
-            status: 'connected'
-        }).then(() => {
-            document.getElementById('firebaseStatus').innerHTML = '✅ Conectado a Firebase - Listo para jugar';
-        }).catch((error) => {
-            document.getElementById('firebaseStatus').innerHTML = '❌ Error: ' + error.message;
-        });
-
-        // Función para unirse como estudiante
-        async function joinAsStudent() {
-            const name = document.getElementById('studentName').value;
-            const code = document.getElementById('gameCodeInput').value.toUpperCase();
-            
-            if (!name || !code) {
-                alert('Por favor ingresa tu nombre y el código del juego');
-                return;
-            }
-            
-            currentGameCode = code;
-            currentPlayerId = document.getElementById('studentId').value || 'student_' + Date.now();
-            
-            // Verificar que el juego existe
+        // Función para inicializar Firebase
+        function initializeFirebase() {
             try {
-                const gameDoc = await db.collection('games').doc(code).get();
-                if (!gameDoc.exists) {
-                    alert('❌ Código de juego inválido. El moderador debe crear el juego primero.');
-                    return;
+                console.log("🔄 Inicializando Firebase...");
+                
+                // Verificar si Firebase está disponible
+                if (typeof firebase === 'undefined') {
+                    throw new Error("Firebase SDK no se cargó correctamente");
+                }
+
+                // Inicializar Firebase
+                firebase.initializeApp(firebaseConfig);
+                db = firebase.firestore();
+                
+                console.log("✅ Firebase App inicializada:", firebase.app().name);
+                
+                // Probar la conexión
+                testFirebaseConnection();
+                
+            } catch (error) {
+                console.error("❌ Error inicializando Firebase:", error);
+                updateStatus("❌ Error: " + error.message, "error");
+                document.getElementById('startBtn').disabled = true;
+                document.getElementById('startBtn').innerHTML = "❌ Error de Conexión";
+            }
+        }
+
+        // Función para probar la conexión
+        async function testFirebaseConnection() {
+            try {
+                updateStatus("🔍 Probando conexión con Firestore...", "warning");
+                
+                // Intentar escribir un documento de prueba
+                await db.collection('connection_test').doc('test').set({
+                    timestamp: new Date(),
+                    status: 'connected',
+                    userAgent: navigator.userAgent
+                });
+                
+                console.log("✅ Escritura en Firestore exitosa");
+                
+                // Intentar leer el documento
+                const doc = await db.collection('connection_test').doc('test').get();
+                
+                if (doc.exists) {
+                    console.log("✅ Lectura de Firestore exitosa");
+                    updateStatus("✅ ¡Conectado a Firebase correctamente!", "success");
+                    firebaseInitialized = true;
+                    document.getElementById('startBtn').disabled = false;
+                    document.getElementById('startBtn').innerHTML = "🎮 ¡Comenzar Juego!";
+                } else {
+                    throw new Error("No se pudo leer el documento de prueba");
                 }
                 
-                if (gameDoc.data().gameStarted) {
-                    alert('❌ El juego ya ha comenzado. No puedes unirte ahora.');
-                    return;
-                }
             } catch (error) {
-                alert('Error al verificar el juego: ' + error.message);
-                return;
+                console.error("❌ Error en prueba de conexión:", error);
+                
+                // Mostrar error específico
+                let errorMessage = "Error de conexión: ";
+                
+                if (error.code === 'permission-denied') {
+                    errorMessage += "Permisos denegados. Revisa las reglas de Firestore.";
+                } else if (error.code === 'unavailable') {
+                    errorMessage += "Servicio no disponible. Revisa tu conexión a internet.";
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                updateStatus(errorMessage, "error");
+                document.getElementById('startBtn').disabled = true;
+                document.getElementById('startBtn').innerHTML = "❌ Error de Conexión";
+            }
+        }
+
+        // Función para actualizar el estado
+        function updateStatus(message, type) {
+            const statusElement = document.getElementById('firebaseStatus');
+            statusElement.textContent = message;
+            statusElement.className = 'status-message';
+            
+            if (type === 'success') {
+                statusElement.classList.add('status-success');
+            } else if (type === 'error') {
+                statusElement.classList.add('status-error');
+            } else if (type === 'warning') {
+                statusElement.classList.add('status-warning');
             }
             
-            // Unirse al juego
+            console.log("Status:", message);
+        }
+
+        // Función para registrar estudiante
+        async function registerStudent() {
+            if (!firebaseInitialized) {
+                alert("Firebase no está inicializado. Espera a que se complete la conexión.");
+                return;
+            }
+
+            const name = document.getElementById('studentName').value;
+            const id = document.getElementById('studentId').value;
+
+            if (!name || !id) {
+                alert('Por favor ingresa tu nombre y matrícula');
+                return;
+            }
+
             try {
-                await db.collection('games').doc(code).collection('players').doc(currentPlayerId).set({
+                updateStatus("📝 Registrando estudiante...", "warning");
+                
+                const studentData = {
                     name: name,
-                    id: currentPlayerId,
+                    id: id,
                     avatar: name.charAt(0).toUpperCase(),
                     score: 0,
-                    connected: true,
-                    joinedAt: new Date(),
-                    isModerator: false
-                });
-                
-                document.getElementById('loginScreen').classList.remove('active');
-                document.getElementById('waitingScreen').classList.add('active');
-                document.getElementById('waitingGameCode').textContent = code;
-                
-                // Escuchar jugadores en tiempo real
-                setupPlayersListener();
-                // Escuchar inicio del juego
-                setupGameStartListener();
-                
-            } catch (error) {
-                alert('Error al unirse al juego: ' + error.message);
-            }
-        }
+                    startTime: new Date(),
+                    completed: false,
+                    registeredAt: new Date()
+                };
 
-        // Función para unirse como moderador
-        async function joinAsModerator() {
-            isModerator = true;
-            currentGameCode = 'KAH' + Math.floor(100 + Math.random() * 900);
-            currentPlayerId = 'moderator_' + Date.now();
-            
-            document.getElementById('loginScreen').classList.remove('active');
-            document.getElementById('moderatorScreen').classList.add('active');
-            document.getElementById('moderatorGameCode').textContent = currentGameCode;
-            
-            // Crear juego en Firebase
-            try {
-                await db.collection('games').doc(currentGameCode).set({
-                    code: currentGameCode,
-                    moderator: currentPlayerId,
-                    status: 'waiting',
-                    createdAt: new Date(),
-                    players: [],
-                    gameStarted: false,
-                    currentQuestion: 0
-                });
+                // Guardar en Firebase
+                await db.collection('players').doc(id).set(studentData);
                 
-                // Escuchar jugadores en tiempo real
-                setupPlayersListener();
+                updateStatus("✅ Estudiante registrado correctamente", "success");
+                
+                // Redirigir al juego después de 1 segundo
+                setTimeout(() => {
+                    startGame(studentData);
+                }, 1000);
                 
             } catch (error) {
-                alert('Error al crear el juego: ' + error.message);
+                console.error("Error registrando estudiante:", error);
+                updateStatus("❌ Error al registrar: " + error.message, "error");
             }
         }
 
-        // Configurar listener de jugadores en tiempo real
-        function setupPlayersListener() {
-            if (playersListener) playersListener(); // Limpiar listener anterior
+        // Función para iniciar el juego (simplificada por ahora)
+        function startGame(studentData) {
+            alert(`¡Bienvenido ${studentData.name}!\n\nEl juego comenzará ahora.\n\nEsta es una versión de prueba. El juego completo cargará a continuación.`);
             
-            playersListener = db.collection('games').doc(currentGameCode).collection('players')
-                .where('connected', '==', true)
-                .onSnapshot(snapshot => {
-                    const players = [];
-                    snapshot.forEach(doc => {
-                        players.push(doc.data());
-                    });
-                    
-                    updatePlayersList(players);
-                }, error => {
-                    console.error('Error en listener de jugadores:', error);
-                });
+            // Aquí cargarías la pantalla de juego completa
+            document.getElementById('loginScreen').innerHTML = `
+                <div style="padding: 60px; text-align: center;">
+                    <h1>🎮 Juego en Desarrollo</h1>
+                    <p>Estudiante: ${studentData.name}</p>
+                    <p>Matrícula: ${studentData.id}</p>
+                    <div class="status-message status-success">
+                        ✅ Conexión a Firebase establecida correctamente
+                    </div>
+                    <button class="btn btn-primary" onclick="location.reload()">
+                        Reiniciar Aplicación
+                    </button>
+                </div>
+            `;
         }
 
-        // Actualizar lista de jugadores
-        function updatePlayersList(players) {
-            if (isModerator) {
-                // Para moderador
-                const playersList = document.getElementById('playersList');
-                const playersCount = document.getElementById('playersCount');
-                const startBtn = document.getElementById('startBtn');
-                
-                playersList.innerHTML = '';
-                players.forEach(player => {
-                    const playerCard = document.createElement('div');
-                    playerCard.className = 'player-card';
-                    playerCard.innerHTML = `
-                        <div class="player-avatar">${player.avatar}</div>
-                        <div>${player.name}</div>
-                    `;
-                    playersList.appendChild(playerCard);
-                });
-                
-                playersCount.textContent = players.length;
-                startBtn.disabled = players.length === 0;
-                
-            } else {
-                // Para estudiantes
-                const playersList = document.getElementById('waitingPlayersList');
-                const playersCount = document.getElementById('waitingPlayersCount');
-                
-                playersList.innerHTML = '';
-                players.forEach(player => {
-                    const playerCard = document.createElement('div');
-                    playerCard.className = 'player-card';
-                    playerCard.innerHTML = `
-                        <div class="player-avatar">${player.avatar}</div>
-                        <div>${player.name}</div>
-                    `;
-                    playersList.appendChild(playerCard);
-                });
-                
-                playersCount.textContent = players.length;
-            }
-        }
-
-        // Escuchar inicio del juego (para estudiantes)
-        function setupGameStartListener() {
-            if (gameListener) gameListener(); // Limpiar listener anterior
-            
-            gameListener = db.collection('games').doc(currentGameCode)
-                .onSnapshot(doc => {
-                    const game = doc.data();
-                    if (game && game.gameStarted && !document.getElementById('gameScreen').classList.contains('active')) {
-                        startGameAsStudent();
-                    }
-                });
-        }
-
-        // Función para iniciar el juego (moderador)
-        async function startGameAsModerator() {
-            try {
-                await db.collection('games').doc(currentGameCode).update({
-                    gameStarted: true,
-                    status: 'playing',
-                    startTime: new Date()
-                });
-                
-                // El moderador también juega
-                document.getElementById('moderatorScreen').classList.remove('active');
-                document.getElementById('gameScreen').classList.add('active');
-                document.getElementById('playerName').textContent = "MODERADOR";
-                document.getElementById('playerAvatar').textContent = "👨‍🏫";
-                
-                // Iniciar juego
-                questions = [...questionBank];
-                loadQuestion();
-                
-            } catch (error) {
-                alert('Error al iniciar el juego: ' + error.message);
-            }
-        }
-
-        // Función para que estudiantes inicien juego
-        function startGameAsStudent() {
-            const name = document.getElementById('studentName').value;
-            document.getElementById('waitingScreen').classList.remove('active');
-            document.getElementById('gameScreen').classList.add('active');
-            document.getElementById('playerName').textContent = name;
-            document.getElementById('playerAvatar').textContent = name.charAt(0).toUpperCase();
-            
-            // Iniciar juego
-            questions = [...questionBank];
-            loadQuestion();
-        }
-
-        // Volver al login
-        async function backToLogin() {
-            // Limpiar listeners
-            if (playersListener) playersListener();
-            if (gameListener) gameListener();
-            
-            // Desconectar jugador
-            if (currentPlayerId && currentGameCode) {
-                try {
-                    await db.collection('games').doc(currentGameCode).collection('players').doc(currentPlayerId).update({
-                        connected: false,
-                        disconnectedAt: new Date()
-                    });
-                } catch (error) {
-                    console.error('Error al desconectar:', error);
-                }
-            }
-            
-            document.getElementById('moderatorScreen').classList.remove('active');
-            document.getElementById('waitingScreen').classList.remove('active');
-            document.getElementById('gameScreen').classList.remove('active');
-            document.getElementById('loginScreen').classList.add('active');
-            isModerator = false;
-            
-            // Resetear juego
-            currentQuestion = 0;
-            score = 0;
-            clearInterval(timerInterval);
-        }
-
-        // Funciones del juego (se mantienen igual)
-        function loadQuestion() {
-            if (currentQuestion >= questions.length) {
-                endGame();
-                return;
-            }
-
-            const q = questions[currentQuestion];
-            document.getElementById('questionText').textContent = q.question;
-            document.getElementById('questionCounter').textContent = `Pregunta ${currentQuestion + 1}/${questions.length}`;
-
-            const options = document.querySelectorAll('.option');
-            options.forEach((opt, index) => {
-                const letter = String.fromCharCode(97 + index);
-                opt.textContent = `${letter.toUpperCase()}) ${q.options[index]}`;
-                opt.className = `option option-${letter}`;
-                opt.onclick = () => selectOption(letter);
-                opt.style.pointerEvents = 'auto';
-                opt.classList.remove('correct-answer', 'incorrect-answer', 'selected');
-            });
-
-            selectedOption = null;
-            document.getElementById('submitBtn').disabled = true;
-            document.getElementById('submitBtn').textContent = 'Confirmar Respuesta';
-            document.getElementById('submitBtn').style.background = '#46178f';
-            resetTimer();
-        }
-
-        function selectOption(option) {
-            selectedOption = option;
-            document.getElementById('submitBtn').disabled = false;
-            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
-            document.querySelector(`.option-${option}`).classList.add('selected');
-        }
-
-        async function submitAnswer() {
-            if (!selectedOption) return;
-
-            const q = questions[currentQuestion];
-            const isCorrect = selectedOption === q.correct;
-            const optionElement = document.querySelector(`.option-${selectedOption}`);
-
-            // Guardar respuesta en Firebase
-            try {
-                await db.collection('games').doc(currentGameCode).collection('answers').add({
-                    playerId: currentPlayerId,
-                    playerName: document.getElementById('playerName').textContent,
-                    questionIndex: currentQuestion,
-                    selectedOption: selectedOption,
-                    isCorrect: isCorrect,
-                    points: isCorrect ? q.points : 0,
-                    timestamp: new Date()
-                });
-
-                // Actualizar puntuación
-                if (isCorrect) {
-                    score += q.points;
-                    await db.collection('games').doc(currentGameCode).collection('players').doc(currentPlayerId).update({
-                        score: score
-                    });
-                }
-            } catch (error) {
-                console.error('Error al guardar respuesta:', error);
-            }
-
-            if (isCorrect) {
-                optionElement.classList.add('correct-answer');
-                document.getElementById('submitBtn').textContent = '🎉 ¡Correcto! +' + q.points + ' puntos';
-                document.getElementById('submitBtn').style.background = '#27ae60';
-            } else {
-                optionElement.classList.add('incorrect-answer');
-                document.querySelector(`.option-${q.correct}`).classList.add('correct-answer');
-                document.getElementById('submitBtn').textContent = '❌ Incorrecto';
-                document.getElementById('submitBtn').style.background = '#e74c3c';
-            }
-
-            document.getElementById('currentScore').textContent = `${score} puntos`;
-            document.querySelectorAll('.option').forEach(opt => opt.style.pointerEvents = 'none');
-            document.getElementById('submitBtn').disabled = true;
-
-            setTimeout(() => {
-                currentQuestion++;
-                loadQuestion();
-            }, 3000);
-        }
-
-        function resetTimer() {
-            timeLeft = 30;
-            clearInterval(timerInterval);
-            const timerProgress = document.getElementById('timerProgress');
-            timerProgress.style.width = '100%';
-            timerProgress.style.background = '#46178f';
-            
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                const progress = (timeLeft / 30) * 100;
-                timerProgress.style.width = `${progress}%`;
-                if (timeLeft <= 10) timerProgress.style.background = '#e74c3c';
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    selectedOption = null;
-                    submitAnswer();
-                }
-            }, 1000);
-        }
-
-        function endGame() {
-            clearInterval(timerInterval);
-            alert(`¡Juego terminado! Puntuación final: ${score} puntos\n¡Excelente trabajo!`);
-            backToLogin();
-        }
-
-        // Limpiar al cerrar la página
-        window.addEventListener('beforeunload', backToLogin);
-
+        // Inicializar cuando la página cargue
         document.addEventListener('DOMContentLoaded', function() {
-            console.log("Kahoot cargado - Firebase REAL implementado");
+            console.log("📄 Página cargada, inicializando Firebase...");
+            initializeFirebase();
+        });
+
+        // Manejar errores globales
+        window.addEventListener('error', function(e) {
+            console.error("Error global:", e.error);
+            updateStatus("❌ Error en la aplicación: " + e.error.message, "error");
         });
     </script>
 </body>
