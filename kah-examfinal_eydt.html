@@ -7,55 +7,338 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <style>
-        /* Todo el CSS anterior se mantiene igual */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #333; min-height: 100vh; padding: 20px; }
-        .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); overflow: hidden; }
-        .login-screen { padding: 60px 40px; text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
-        .login-form { max-width: 400px; margin: 0 auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); color: #333; }
-        .login-form input { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; transition: border-color 0.3s; }
-        .login-form input:focus { border-color: #667eea; outline: none; }
-        .btn { padding: 15px 30px; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; transition: all 0.3s; margin: 10px; }
-        .btn-primary { background: #3498db; color: white; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .game-screen { display: none; min-height: 600px; }
-        .results-screen { display: none; padding: 40px; text-align: center; }
-        .header { background: #2c3e50; color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-        .player-info { display: flex; align-items: center; gap: 15px; }
-        .avatar { width: 50px; height: 50px; border-radius: 50%; background: #3498db; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; color: white; }
-        .score-display { font-size: 24px; font-weight: bold; color: #f1c40f; }
-        .question-container { padding: 40px; text-align: center; }
-        .question-text { font-size: 28px; font-weight: bold; color: #2c3e50; margin-bottom: 30px; line-height: 1.4; }
-        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto; }
-        .option { padding: 25px; border-radius: 15px; font-size: 18px; font-weight: bold; cursor: pointer; transition: all 0.3s; border: 3px solid transparent; color: white; text-align: center; }
-        .option:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .login-screen {
+            padding: 60px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .login-form input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-screen {
+            display: none;
+            min-height: 600px;
+        }
+
+        .results-screen {
+            display: none;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            color: white;
+        }
+
+        .score-display {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f1c40f;
+        }
+
+        .question-container {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .question-number {
+            color: #7f8c8d;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .option {
+            padding: 25px;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            color: white;
+            text-align: center;
+        }
+
+        .option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
         .option-a { background: #e74c3c; }
         .option-b { background: #3498db; }
         .option-c { background: #2ecc71; }
         .option-d { background: #f39c12; }
-        .timer-bar { height: 10px; background: #ecf0f1; margin: 20px 0; border-radius: 5px; overflow: hidden; }
-        .timer-progress { height: 100%; background: #e74c3c; width: 100%; transition: width 1s linear; }
-        .ranking { max-width: 600px; margin: 0 auto; }
-        .ranking-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; margin: 10px 0; background: #f8f9fa; border-radius: 10px; border-left: 5px solid #3498db; }
-        .final-score { font-size: 48px; font-weight: bold; color: #f1c40f; margin: 20px 0; }
-        .achievement { display: inline-block; background: #f1c40f; color: #2c3e50; padding: 10px 20px; margin: 5px; border-radius: 20px; font-weight: bold; }
+
+        .option.selected {
+            border-color: #2c3e50;
+            transform: scale(1.05);
+        }
+
+        .timer-bar {
+            height: 10px;
+            background: #ecf0f1;
+            margin: 20px 0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .timer-progress {
+            height: 100%;
+            background: #e74c3c;
+            width: 100%;
+            transition: width 1s linear;
+        }
+
+        .ranking {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .ranking-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+
+        .final-score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #f1c40f;
+            margin: 20px 0;
+        }
+
+        .achievement {
+            display: inline-block;
+            background: #f1c40f;
+            color: #2c3e50;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .status-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .correct-answer {
+            animation: correctAnswer 0.5s ease;
+            background: #27ae60 !important;
+        }
+
+        .incorrect-answer {
+            animation: incorrectAnswer 0.5s ease;
+            background: #e74c3c !important;
+        }
+
+        .admin-panel {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        @keyframes correctAnswer {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes incorrectAnswer {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -100px) scale(1.5); opacity: 0; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Pantalla de Login -->
         <div class="login-screen" id="loginScreen">
             <h1>🎯 Kahoot - Estudio del Trabajo</h1>
-            <p class="subtitle">Demuestra tus conocimientos y compite con tus compañeros</p>
+            <p class="subtitle">20 Reactivos - Evaluación Final</p>
             
             <div class="login-form">
                 <h2>Registro de Estudiante</h2>
+                
+                <div id="firebaseStatus" class="status-message status-warning">
+                    🔄 Conectando con Firebase...
+                </div>
+
                 <input type="text" id="studentName" placeholder="Tu nombre completo" maxlength="20">
                 <input type="text" id="studentId" placeholder="Matrícula" maxlength="10">
-                <button class="btn btn-primary" onclick="registerStudent()">¡Comenzar Juego!</button>
-                <div id="firebaseStatus" style="margin-top: 15px; font-size: 12px; color: #666;"></div>
+                <button class="btn btn-primary" onclick="registerStudent()" id="startBtn">
+                    🎮 ¡Comenzar Evaluación!
+                </button>
+
+                <!-- Panel Admin -->
+                <div class="admin-panel">
+                    <h4>🔧 Panel de Control</h4>
+                    <button class="btn btn-warning" onclick="showStats()">Ver Estadísticas</button>
+                    <button class="btn btn-danger" onclick="resetGame()">Reiniciar Juego</button>
+                </div>
             </div>
         </div>
 
+        <!-- Pantalla de Juego -->
         <div class="game-screen" id="gameScreen">
             <div class="header">
                 <div class="player-info">
@@ -65,7 +348,7 @@
                         <div class="score-display" id="currentScore">0 puntos</div>
                     </div>
                 </div>
-                <div class="question-counter" id="questionCounter">Pregunta 1/5</div>
+                <div class="question-counter" id="questionCounter">Pregunta 1/20</div>
             </div>
 
             <div class="question-container">
@@ -83,33 +366,36 @@
                     <div class="option option-d" onclick="selectOption('d')">D) Cargando...</div>
                 </div>
 
-                <button class="btn btn-primary" id="submitBtn" onclick="submitAnswer()" disabled>Confirmar Respuesta</button>
+                <button class="btn btn-success" id="submitBtn" onclick="submitAnswer()" disabled>Confirmar Respuesta</button>
             </div>
         </div>
 
+        <!-- Pantalla de Resultados -->
         <div class="results-screen" id="resultsScreen">
             <div class="results-header">
-                <h1>🏆 ¡Juego Terminado!</h1>
+                <h1>🏆 ¡Evaluación Terminada!</h1>
                 <div class="final-score" id="finalScore">0 puntos</div>
                 <p id="performanceMessage">¡Excelente trabajo!</p>
             </div>
 
             <div class="achievements" id="achievementsContainer"></div>
 
-            <h2>🏅 Ranking de la Clase</h2>
+            <h2>🏅 Ranking General</h2>
             <div class="ranking" id="rankingList">
-                <div class="ranking-item"><div>Cargando ranking...</div></div>
+                <div class="ranking-item">
+                    <div>Cargando ranking en tiempo real...</div>
+                </div>
             </div>
 
             <div style="margin-top: 30px;">
-                <button class="btn btn-primary" onclick="restartGame()">Jugar Otra Vez</button>
-                <button class="btn btn-primary" onclick="showQuestionStats()">Ver Estadísticas</button>
+                <button class="btn btn-primary" onclick="restartGame()">Intentar Otra Vez</button>
+                <button class="btn btn-warning" onclick="showDetailedResults()">Ver Resultados Detallados</button>
             </div>
         </div>
     </div>
 
     <script>
-        // ✅ USA TU CONFIGURACIÓN REAL DE FIREBASE
+        // 🔥 CONFIGURACIÓN FIREBASE - PROYECTO REAL
         const firebaseConfig = {
             apiKey: "AIzaSyDm385YCrTr_Ayzdkm6pSUC8BDtIz5aYys",
             authDomain: "evaluacionfinalcurso-f3f5b.firebaseapp.com",
@@ -121,19 +407,15 @@
         };
 
         // Inicializar Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        try {
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+            console.log("✅ Firebase inicializado correctamente");
+        } catch (error) {
+            console.error("❌ Error inicializando Firebase:", error);
+        }
 
-        // Verificar conexión
-        db.collection('test').doc('connection').set({
-            timestamp: new Date(),
-            status: 'connected',
-            project: 'evaluacionfinalcurso-f3f5b'
-        }).then(() => {
-            document.getElementById('firebaseStatus').innerHTML = '✅ Firebase conectado correctamente a tu proyecto';
-        }).catch((error) => {
-            document.getElementById('firebaseStatus').innerHTML = '❌ Error: ' + error.message;
-        });
+        const db = firebase.firestore();
 
         // Variables del juego
         let currentPlayer = {};
@@ -144,8 +426,9 @@
         let timerInterval;
         let questions = [];
 
-        // Banco de preguntas completo
+        // BANCO DE 20 PREGUNTAS REALES
         const questionBank = [
+            // IISE BOK (5 preguntas)
             {
                 question: "¿Cuál de las siguientes áreas del IISE se enfoca en la disposición física de recursos?",
                 options: ["Work Design & Measurement", "Facilities Engineering & Energy Management", "Operations Research & Analysis", "Quality & Reliability Engineering"],
@@ -161,12 +444,58 @@
                 category: "IISE_BOK"
             },
             {
+                question: "¿Qué área del IISE se enfoca en la capacidad de sistemas para funcionar bajo condiciones específicas?",
+                options: ["Quality Engineering", "Reliability Engineering", "Safety Engineering", "Information Engineering"],
+                correct: "b",
+                points: 150,
+                category: "IISE_BOK"
+            },
+            {
+                question: "¿Cuál NO es una de las áreas principales del Cuerpo de Conocimiento del IISE?",
+                options: ["Work Design & Measurement", "Operations Research & Analysis", "Marketing Engineering", "Engineering Economic Analysis"],
+                correct: "c",
+                points: 200,
+                category: "IISE_BOK"
+            },
+            {
+                question: "¿Qué área del IISE se relaciona con el análisis de costos y beneficios de proyectos?",
+                options: ["Engineering Economic Analysis", "Facilities Engineering", "Quality Engineering", "Information Engineering"],
+                correct: "a",
+                points: 150,
+                category: "IISE_BOK"
+            },
+
+            // FUNDAMENTOS (4 preguntas)
+            {
                 question: "¿Quién es considerado el padre de la administración científica?",
                 options: ["Henry Gantt", "Frederick Taylor", "Frank Gilbreth", "Henry Ford"],
                 correct: "b",
                 points: 150,
                 category: "Fundamentos"
             },
+            {
+                question: "¿Cuál de los siguientes es considerado precursor fundamental del estudio del trabajo?",
+                options: ["Henry Gantt", "Frederick Taylor", "Frank Gilbreth", "Todos los anteriores"],
+                correct: "d",
+                points: 100,
+                category: "Fundamentos"
+            },
+            {
+                question: "Según los Gilbreth, ¿cómo se denominan los elementos básicos del movimiento humano?",
+                options: ["Therbligs", "Movimientos elementales", "Micromovimientos", "Unidades de movimiento"],
+                correct: "a",
+                points: 200,
+                category: "Fundamentos"
+            },
+            {
+                question: "¿Qué principio de Taylor busca encontrar 'la mejor manera' de realizar una tarea?",
+                options: ["Principio de preparación", "Principio de ejecución", "Principio de planeación", "Principio de estandarización"],
+                correct: "c",
+                points: 150,
+                category: "Fundamentos"
+            },
+
+            // ESTUDIO DE TIEMPOS (4 preguntas)
             {
                 question: "¿Qué representa el Tiempo Estándar en estudio de tiempos?",
                 options: ["Tiempo promedio observado", "Tiempo que debería tomar una tarea", "Tiempo más rápido registrado", "Tiempo con descansos incluidos"],
@@ -175,15 +504,109 @@
                 category: "Estudio_Tiempos"
             },
             {
+                question: "¿Qué representa el Tiempo Normal?",
+                options: ["Tiempo observado × Factor de valoración", "Tiempo observado + Suplementos", "Tiempo estándar - Tiempo de descanso", "Tiempo promedio de varios ciclos"],
+                correct: "a",
+                points: 150,
+                category: "Estudio_Tiempos"
+            },
+            {
+                question: "Según el sistema Westinghouse, ¿qué factor NO se considera para ajustar el tiempo observado?",
+                options: ["Habilidad", "Esfuerzo", "Condiciones", "Edad del operario"],
+                correct: "d",
+                points: 100,
+                category: "Estudio_Tiempos"
+            },
+            {
+                question: "¿Qué tipo de suplemento aplica para necesidades personales como ir al baño?",
+                options: ["Suplementos constantes", "Suplementos variables", "Suplementos por fatiga", "Suplementos por contingencia"],
+                correct: "a",
+                points: 150,
+                category: "Estudio_Tiempos"
+            },
+
+            // HERRAMIENTAS (4 preguntas)
+            {
                 question: "¿Qué técnica usa códigos predefinidos para analizar movimientos?",
                 options: ["Diagrama de flujo", "Diagrama bimanual", "MTM (Methods-Time Measurement)", "Estudio de tiempos con cronómetro"],
                 correct: "c",
                 points: 250,
                 category: "Herramientas"
+            },
+            {
+                question: "¿Qué tipo de diagrama muestra simultáneamente las actividades de un operario y las de una máquina?",
+                options: ["Diagrama de flujo de proceso", "Diagrama de operaciones", "Diagrama hombre-máquina", "Diagrama de recorrido"],
+                correct: "c",
+                points: 150,
+                category: "Herramientas"
+            },
+            {
+                question: "¿Qué símbolo ASME se utiliza para representar una operación?",
+                options: ["Círculo", "Cuadrado", "Triángulo", "Flecha"],
+                correct: "a",
+                points: 100,
+                category: "Herramientas"
+            },
+            {
+                question: "¿Qué diagrama muestra el flujo de materiales sobre el layout de la planta?",
+                options: ["Diagrama de proceso", "Diagrama de operaciones", "Diagrama de recorrido", "Diagrama bimanual"],
+                correct: "c",
+                points: 150,
+                category: "Herramientas"
+            },
+
+            // ERGONOMÍA (3 preguntas)
+            {
+                question: "¿Qué principio de la economía de movimientos establece que las manos deben trabajar coordinadamente?",
+                options: ["Principio de simultaneidad", "Principio de simetría", "Principio de ritmo", "Principio de continuidad"],
+                correct: "a",
+                points: 150,
+                category: "Ergonomia"
+            },
+            {
+                question: "¿Qué ciencia estudia las medidas corporales para adaptar el trabajo al trabajador?",
+                options: ["Biomecánica", "Antropometría", "Fisiología", "Psicología"],
+                correct: "b",
+                points: 100,
+                category: "Ergonomia"
+            },
+            {
+                question: "¿Qué herramienta se usa para analizar movimientos de ambas manos simultáneamente?",
+                options: ["Diagrama de flujo", "Diagrama bimanual", "Diagrama de recorrido", "Diagrama hombre-máquina"],
+                correct: "b",
+                points: 200,
+                category: "Ergonomia"
             }
         ];
 
-        // Función para registrar estudiante
+        // ========== INICIALIZACIÓN ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeFirebase();
+        });
+
+        async function initializeFirebase() {
+            try {
+                // Probar conexión
+                await db.collection('connection').doc('test').set({
+                    timestamp: new Date(),
+                    status: 'connected',
+                    project: 'evaluacionfinalcurso-f3f5b'
+                });
+                
+                document.getElementById('firebaseStatus').className = 'status-message status-success';
+                document.getElementById('firebaseStatus').textContent = '✅ Conectado a Firebase correctamente';
+                
+                console.log("✅ Firebase conectado y funcionando");
+                
+            } catch (error) {
+                document.getElementById('firebaseStatus').className = 'status-message status-error';
+                document.getElementById('firebaseStatus').textContent = '❌ Error: ' + error.message;
+                console.error("Error Firebase:", error);
+            }
+        }
+
+        // ========== FUNCIONES PRINCIPALES ==========
+
         async function registerStudent() {
             const name = document.getElementById('studentName').value;
             const id = document.getElementById('studentId').value;
@@ -212,6 +635,7 @@
                 document.getElementById('playerName').textContent = name;
                 document.getElementById('playerAvatar').textContent = currentPlayer.avatar;
                 
+                // Mezclar preguntas
                 questions = [...questionBank].sort(() => Math.random() - 0.5);
                 loadQuestion();
                 
@@ -220,7 +644,6 @@
             }
         }
 
-        // Cargar pregunta
         function loadQuestion() {
             if (currentQuestion >= questions.length) {
                 endGame();
@@ -246,7 +669,6 @@
             resetTimer();
         }
 
-        // Seleccionar opción
         function selectOption(option) {
             selectedOption = option;
             document.getElementById('submitBtn').disabled = false;
@@ -258,7 +680,6 @@
             document.querySelector(`.option-${option}`).classList.add('selected');
         }
 
-        // Enviar respuesta
         async function submitAnswer() {
             if (!selectedOption) return;
 
@@ -271,10 +692,13 @@
                 playerId: currentPlayer.id,
                 playerName: currentPlayer.name,
                 questionIndex: currentQuestion,
+                question: q.question,
                 selectedOption: selectedOption,
+                correctOption: q.correct,
                 isCorrect: isCorrect,
+                points: isCorrect ? q.points : 0,
                 timestamp: new Date(),
-                points: isCorrect ? q.points : 0
+                category: q.category
             });
 
             if (isCorrect) {
@@ -299,7 +723,6 @@
             }, 2000);
         }
 
-        // Animación de puntos
         function showPointsAnimation(points) {
             const pointsDiv = document.createElement('div');
             pointsDiv.textContent = `+${points}`;
@@ -322,7 +745,6 @@
             }, 1000);
         }
 
-        // Actualizar puntuación
         async function updateScore() {
             document.getElementById('currentScore').textContent = `${score} puntos`;
             currentPlayer.score = score;
@@ -333,7 +755,6 @@
             });
         }
 
-        // Timer
         function resetTimer() {
             timeLeft = 30;
             clearInterval(timerInterval);
@@ -361,15 +782,15 @@
             }, 1000);
         }
 
-        // Finalizar juego
         async function endGame() {
             clearInterval(timerInterval);
             
-            await db.collection('players').doc(currentPlayer.id).update({
-                finalScore: score,
-                endTime: new Date(),
-                completed: true
-            });
+            // Guardar resultado final
+            currentPlayer.finalScore = score;
+            currentPlayer.endTime = new Date();
+            currentPlayer.completed = true;
+            
+            await db.collection('players').doc(currentPlayer.id).update(currentPlayer);
 
             document.getElementById('gameScreen').style.display = 'none';
             document.getElementById('resultsScreen').style.display = 'block';
@@ -378,47 +799,48 @@
             showPerformanceMessage();
             showAchievements();
             loadRanking();
+            updateGlobalStats();
         }
 
-        // Mensaje de desempeño
         function showPerformanceMessage() {
-            const percentage = (score / (questions.length * 100)) * 100;
+            const percentage = (score / 3000) * 100; // Máximo 3000 puntos
             let message = '';
             
-            if (percentage >= 90) message = '🏆 ¡Excelente! Eres un experto en Estudio del Trabajo';
-            else if (percentage >= 70) message = '🎯 ¡Muy bien! Tienes buenos conocimientos';
-            else if (percentage >= 50) message = '👍 Buen esfuerzo, sigue practicando';
-            else message = '💪 Sigue estudiando, lo lograrás';
+            if (percentage >= 90) message = '🏆 ¡Excelente! Dominas completamente el Estudio del Trabajo';
+            else if (percentage >= 80) message = '🎯 ¡Muy bien! Tienes conocimientos avanzados';
+            else if (percentage >= 70) message = '👍 Buen desempeño, conocimientos sólidos';
+            else if (percentage >= 60) message = '📚 Nivel satisfactorio, sigue practicando';
+            else message = '💪 Sigue estudiando, identificarás áreas de mejora';
             
             document.getElementById('performanceMessage').textContent = message;
         }
 
-        // Mostrar logros
         function showAchievements() {
             const achievements = document.getElementById('achievementsContainer');
             achievements.innerHTML = '';
             
-            const percentage = (score / (questions.length * 100)) * 100;
+            const percentage = (score / 3000) * 100;
             
             if (percentage >= 90) {
                 achievements.innerHTML += '<div class="achievement">🏅 Experto en IISE</div>';
             }
             if (percentage >= 80) {
-                achievements.innerHTML += '<div class="achievement">⚡ Velocidad de Respuesta</div>';
+                achievements.innerHTML += '<div class="achievement">⚡ Alto Rendimiento</div>';
             }
-            if (score >= 1000) {
-                achievements.innerHTML += '<div class="achievement">🌟 Puntuación Alta</div>';
+            if (score >= 2500) {
+                achievements.innerHTML += '<div class="achievement">🌟 Puntuación Excelente</div>';
+            }
+            if (currentQuestion === questions.length) {
+                achievements.innerHTML += '<div class="achievement">💯 Completista</div>';
             }
         }
 
-        // Cargar ranking
         function loadRanking() {
             db.collection('players')
                 .where('completed', '==', true)
                 .orderBy('finalScore', 'desc')
                 .limit(10)
-                .get()
-                .then(snapshot => {
+                .onSnapshot(snapshot => {
                     const ranking = document.getElementById('rankingList');
                     ranking.innerHTML = '';
                     
@@ -450,11 +872,29 @@
                 });
         }
 
-        function showQuestionStats() {
-            alert('Las estadísticas se están guardando en tu base de datos de Firebase.');
+        async function updateGlobalStats() {
+            // Actualizar estadísticas globales
+            const statsRef = db.collection('stats').doc('global');
+            const stats = await statsRef.get();
+            
+            if (stats.exists) {
+                const currentStats = stats.data();
+                await statsRef.update({
+                    totalPlayers: currentStats.totalPlayers + 1,
+                    totalGames: currentStats.totalGames + 1,
+                    averageScore: (currentStats.averageScore * currentStats.totalPlayers + score) / (currentStats.totalPlayers + 1),
+                    lastUpdate: new Date()
+                });
+            } else {
+                await statsRef.set({
+                    totalPlayers: 1,
+                    totalGames: 1,
+                    averageScore: score,
+                    created: new Date()
+                });
+            }
         }
 
-        // Reiniciar juego
         function restartGame() {
             currentQuestion = 0;
             score = 0;
@@ -468,29 +908,72 @@
             updateScore();
         }
 
-        // CSS para animación
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes floatUp {
-                0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-                100% { transform: translate(-50%, -100px) scale(1.5); opacity: 0; }
+        async function showStats() {
+            const stats = await db.collection('stats').doc('global').get();
+            const players = await db.collection('players').where('completed', '==', true).get();
+            
+            let message = '📊 ESTADÍSTICAS GLOBALES\n\n';
+            
+            if (stats.exists) {
+                const data = stats.data();
+                message += `👥 Total de Jugadores: ${data.totalPlayers || 0}\n`;
+                message += `🎮 Total de Partidas: ${data.totalGames || 0}\n`;
+                message += `📈 Puntuación Promedio: ${Math.round(data.averageScore || 0)} puntos\n\n`;
             }
-            @keyframes correctAnswer {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.1); }
-                100% { transform: scale(1); }
+            
+            message += `🏆 TOP 5 JUGADORES:\n`;
+            const topPlayers = [];
+            players.forEach(doc => {
+                topPlayers.push(doc.data());
+            });
+            
+            topPlayers.sort((a, b) => b.finalScore - a.finalScore).slice(0, 5).forEach((player, index) => {
+                message += `${index + 1}. ${player.name} - ${player.finalScore} pts\n`;
+            });
+            
+            alert(message);
+        }
+
+        async function resetGame() {
+            if (confirm('¿Estás seguro de que quieres reiniciar TODO el juego? Esto borrará todos los datos.')) {
+                // Borrar todos los datos (solo para administración)
+                const batch = db.batch();
+                
+                const players = await db.collection('players').get();
+                players.forEach(doc => {
+                    batch.delete(doc.ref);
+                });
+                
+                const answers = await db.collection('answers').get();
+                answers.forEach(doc => {
+                    batch.delete(doc.ref);
+                });
+                
+                const stats = await db.collection('stats').get();
+                stats.forEach(doc => {
+                    batch.delete(doc.ref);
+                });
+                
+                await batch.commit();
+                alert('✅ Todos los datos han sido reiniciados');
+                location.reload();
             }
-            @keyframes incorrectAnswer {
-                0% { transform: translateX(0); }
-                25% { transform: translateX(-10px); }
-                50% { transform: translateX(10px); }
-                75% { transform: translateX(-10px); }
-                100% { transform: translateX(0); }
-            }
-            .correct-answer { animation: correctAnswer 0.5s ease; background: #27ae60 !important; }
-            .incorrect-answer { animation: incorrectAnswer 0.5s ease; background: #e74c3c !important; }
-        `;
-        document.head.appendChild(style);
+        }
+
+        function showDetailedResults() {
+            let message = '📋 RESULTADO DETALLADO\n\n';
+            message += `🎯 Puntuación Final: ${score} puntos\n`;
+            message += `📊 Porcentaje: ${Math.round((score / 3000) * 100)}%\n`;
+            message += `✅ Preguntas Contestadas: ${currentQuestion}/20\n\n`;
+            message += '📚 ÁREAS EVALUADAS:\n';
+            message += '• IISE Body of Knowledge\n';
+            message += '• Fundamentos del Estudio del Trabajo\n';
+            message += '• Estudio de Tiempos\n';
+            message += '• Herramientas de Análisis\n';
+            message += '• Ergonomía y Diseño\n';
+            
+            alert(message);
+        }
     </script>
 </body>
 </html>
