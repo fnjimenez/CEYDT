@@ -7,198 +7,360 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <style>
-        /* Estilos anteriores se mantienen, mejoramos las opciones */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; 
+        }
         
+        body { 
+            background: linear-gradient(135deg, #6610f2 0%, #6f42c1 100%); 
+            color: #333; 
+            min-height: 100vh; 
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            background: white; 
+            border-radius: 25px; 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15); 
+            overflow: hidden;
+            min-height: 90vh;
+        }
+        
+        /* HEADER MEJORADO */
+        .header { 
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); 
+            color: white; 
+            padding: 25px 40px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .player-info { 
+            display: flex; 
+            align-items: center; 
+            gap: 20px; 
+        }
+        
+        .avatar { 
+            width: 70px; 
+            height: 70px; 
+            border-radius: 50%; 
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: bold; 
+            font-size: 28px; 
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 3px solid white;
+        }
+        
+        .player-details {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        #playerName {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .score-display { 
+            font-size: 28px; 
+            font-weight: bold; 
+            color: #f1c40f;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .question-counter { 
+            font-size: 20px; 
+            font-weight: 600;
+            background: rgba(255,255,255,0.1);
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        /* CONTENEDOR DE PREGUNTA MEJORADO */
+        .question-container { 
+            padding: 50px 40px; 
+            text-align: center; 
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .question-number { 
+            font-size: 18px; 
+            color: #6c757d; 
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .question-text { 
+            font-size: 32px; 
+            font-weight: 700; 
+            color: #2c3e50; 
+            margin-bottom: 40px; 
+            line-height: 1.4;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            padding: 0 20px;
+        }
+        
+        /* TIMER MEJORADO */
+        .timer-container {
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        
+        .timer-bar { 
+            height: 16px; 
+            background: #dee2e6; 
+            margin: 20px 0; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .timer-progress { 
+            height: 100%; 
+            background: linear-gradient(90deg, #28a745, #ffc107, #dc3545);
+            width: 100%; 
+            transition: width 1s linear;
+            border-radius: 10px;
+        }
+        
+        .timer-text {
+            font-size: 16px;
+            color: #6c757d;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        /* OPCIONES MEJORADAS */
         .options-grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
-            gap: 20px; 
-            max-width: 800px; 
-            margin: 0 auto; 
+            gap: 25px; 
+            max-width: 900px; 
+            margin: 0 auto 40px;
         }
+        
         .option { 
-            padding: 25px; 
-            border-radius: 15px; 
-            font-size: 18px; 
-            font-weight: bold; 
+            padding: 35px 25px; 
+            border-radius: 20px; 
+            font-size: 22px; 
+            font-weight: 700; 
             cursor: pointer; 
-            transition: all 0.3s; 
-            border: 3px solid transparent; 
+            transition: all 0.3s ease; 
+            border: 4px solid transparent; 
             color: white; 
             text-align: center;
             position: relative;
             overflow: hidden;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         
-        /* Colores base de las opciones */
-        .option-a { background: #e74c3c; }
-        .option-b { background: #3498db; }
-        .option-c { background: #2ecc71; }
-        .option-d { background: #f39c12; }
+        /* Colores vibrantes tipo Kahoot */
+        .option-a { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .option-b { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .option-c { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .option-d { background: linear-gradient(135deg, #f39c12, #e67e22); }
         
         /* Efectos hover */
         .option:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transform: translateY(-8px) scale(1.02); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
             filter: brightness(1.1);
         }
         
-        /* Opción seleccionada - Efecto tipo Kahoot */
+        /* Selección MEJORADA */
         .option.selected {
-            border: 3px solid white;
-            box-shadow: 0 0 0 4px currentColor, 0 0 20px rgba(0,0,0,0.4);
-            transform: scale(1.05);
-            animation: pulse 1.5s infinite;
+            border: 4px solid white;
+            box-shadow: 0 0 0 6px currentColor, 0 20px 40px rgba(0,0,0,0.3);
+            transform: scale(1.08);
+            animation: pulseBorder 2s infinite;
         }
         
-        /* Efecto de brillo para selección */
-        .option.selected::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
-            z-index: 1;
-        }
-        
-        /* Indicador de selección (checkmark) */
+        /* Indicador de selección más visible */
         .option.selected::after {
             content: '✓';
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255,255,255,0.9);
+            top: 15px;
+            right: 15px;
+            background: white;
             color: #2c3e50;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 16px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
-        
-        /* Respuesta correcta */
-        .correct-answer {
-            background: #27ae60 !important;
-            border: 3px solid #2ecc71 !important;
-            box-shadow: 0 0 0 4px #27ae60, 0 0 30px rgba(39, 174, 96, 0.5) !important;
-            transform: scale(1.05);
-        }
-        
-        /* Respuesta incorrecta */
-        .incorrect-answer {
-            background: #e74c3c !important;
-            border: 3px solid #c0392b !important;
-            box-shadow: 0 0 0 4px #e74c3c, 0 0 30px rgba(231, 76, 60, 0.3) !important;
-            transform: scale(1.02);
-        }
-        
-        /* Efecto de pulso para selección */
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
-            100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
-        }
-        
-        /* Mejora visual del texto dentro de las opciones */
-        .option-content {
-            position: relative;
-            z-index: 2;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-        
-        /* Efecto de deshabilitado */
-        .option:disabled, .option.disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-            transform: none !important;
-        }
-        
-        /* Mejora del timer */
-        .timer-bar {
-            height: 12px;
-            background: #34495e;
-            margin: 25px 0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .timer-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #2ecc71, #f39c12, #e74c3c);
-            width: 100%;
-            transition: width 1s linear;
-            border-radius: 10px;
-        }
-        
-        /* Mejora del botón de confirmar */
-        #submitBtn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border: none;
-            padding: 15px 40px;
             font-size: 20px;
-            font-weight: bold;
-            border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s;
-            margin-top: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
         }
-        #submitBtn:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        
+        /* BOTÓN MEJORADO */
+        .btn { 
+            padding: 20px 50px; 
+            border: none; 
+            border-radius: 60px; 
+            font-size: 22px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            margin: 20px auto;
+            display: block;
+            min-width: 300px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        #submitBtn:disabled {
-            background: #bdc3c7;
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, #6610f2, #6f42c1); 
+            color: white; 
+        }
+        
+        .btn:hover:not(:disabled) {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+        
+        .btn:disabled {
+            background: #adb5bd;
             cursor: not-allowed;
             transform: none;
+            opacity: 0.7;
+        }
+        
+        /* ANIMACIONES */
+        @keyframes pulseBorder {
+            0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7), 0 20px 40px rgba(0,0,0,0.3); }
+            50% { box-shadow: 0 0 0 10px rgba(255,255,255,0), 0 20px 40px rgba(0,0,0,0.3); }
+            100% { box-shadow: 0 0 0 0 rgba(255,255,255,0), 0 20px 40px rgba(0,0,0,0.3); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .question-text {
+                font-size: 24px;
+                padding: 0 10px;
+            }
+            
+            .option {
+                padding: 25px 20px;
+                font-size: 18px;
+                min-height: 100px;
+            }
+            
+            .header {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .question-container {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Las pantallas se mantienen igual -->
-        <div class="moderator-screen" id="moderatorScreen">...</div>
-        <div class="waiting-screen" id="waitingScreen">...</div>
-        <div class="login-screen" id="loginScreen">...</div>
-        
-        <!-- Pantalla de Juego - Mejorada -->
-        <div class="game-screen" id="gameScreen">
+        <!-- PANTALLA DE LOGIN (inicial) -->
+        <div class="login-screen" id="loginScreen" style="display: block;">
+            <div style="padding: 60px 40px; text-align: center; background: linear-gradient(135deg, #6610f2 0%, #6f42c1 100%); color: white;">
+                <h1 style="font-size: 48px; margin-bottom: 20px;">🎯 Kahoot - Estudio del Trabajo</h1>
+                <p style="font-size: 20px; margin-bottom: 40px;">Demuestra tus conocimientos y compite con tus compañeros</p>
+                
+                <div style="max-width: 400px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); color: #333;">
+                    <h2 style="margin-bottom: 30px; color: #2c3e50;">Unirse al Juego</h2>
+                    <input type="text" id="gameCodeInput" placeholder="Código del juego" maxlength="6" style="width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 18px; text-align: center; font-weight: bold;">
+                    <input type="text" id="studentName" placeholder="Tu nombre completo" maxlength="20" style="width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px;">
+                    <input type="text" id="studentId" placeholder="Matrícula" maxlength="10" style="width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px;">
+                    <button class="btn btn-primary" onclick="simulateJoin()" style="width: 100%; margin: 20px 0;">🎮 Unirse al Juego</button>
+                    <div style="margin-top: 20px;">
+                        <button class="btn" onclick="simulateModerator()" style="background: #28a745; color: white; width: 100%;">👨‍🏫 Soy el Moderador</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANTALLA DE JUEGO (oculta inicialmente) -->
+        <div class="game-screen" id="gameScreen" style="display: none;">
             <div class="header">
                 <div class="player-info">
-                    <div class="avatar" id="playerAvatar">U</div>
-                    <div>
-                        <div id="playerName">Estudiante</div>
+                    <div class="avatar" id="playerAvatar">🎓</div>
+                    <div class="player-details">
+                        <div id="playerName">María González</div>
                         <div class="score-display" id="currentScore">0 puntos</div>
                     </div>
                 </div>
                 <div class="question-counter" id="questionCounter">Pregunta 1/30</div>
             </div>
 
-            <div class="question-container">
+            <div class="question-container fade-in">
                 <div class="question-number" id="questionNumber">Pregunta #1</div>
-                <div class="question-text" id="questionText">Cargando pregunta...</div>
+                <div class="question-text" id="questionText">
+                    ¿Qué área del IISE se enfoca en el diseño de estaciones de trabajo y métodos?
+                </div>
                 
-                <div class="timer-bar">
-                    <div class="timer-progress" id="timerProgress"></div>
+                <div class="timer-container">
+                    <div class="timer-bar">
+                        <div class="timer-progress" id="timerProgress" style="width: 100%;"></div>
+                    </div>
+                    <div class="timer-text">Tiempo restante: <span id="timeLeft">30</span> segundos</div>
                 </div>
 
                 <div class="options-grid">
                     <div class="option option-a" onclick="selectOption('a')">
-                        <div class="option-content">A) Cargando...</div>
+                        A) Facilities Engineering
                     </div>
                     <div class="option option-b" onclick="selectOption('b')">
-                        <div class="option-content">B) Cargando...</div>
+                        B) Work Design & Measurement
                     </div>
                     <div class="option option-c" onclick="selectOption('c')">
-                        <div class="option-content">C) Cargando...</div>
+                        C) Operations Research
                     </div>
                     <div class="option option-d" onclick="selectOption('d')">
-                        <div class="option-content">D) Cargando...</div>
+                        D) Quality Engineering
                     </div>
                 </div>
 
@@ -207,20 +369,36 @@
                 </button>
             </div>
         </div>
-
-        <div class="ranking-screen" id="rankingScreen">...</div>
-        <div class="results-screen" id="resultsScreen">...</div>
     </div>
 
     <script>
-        // ... código de Firebase y variables globales ...
-
-        // MEJORADA: Función para seleccionar opción
+        // Funciones de simulación para demostración
+        function simulateJoin() {
+            const name = document.getElementById('studentName').value || 'Estudiante Demo';
+            const code = document.getElementById('gameCodeInput').value || 'ABC123';
+            
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+            document.getElementById('playerName').textContent = name;
+            document.getElementById('playerAvatar').textContent = name.charAt(0).toUpperCase();
+            
+            // Iniciar timer de demostración
+            startDemoTimer();
+        }
+        
+        function simulateModerator() {
+            alert('Función de moderador en desarrollo...');
+        }
+        
+        // Variables para la demo
+        let selectedOption = null;
+        let demoTimeLeft = 30;
+        let demoInterval;
+        
         function selectOption(option) {
             // Remover selección anterior
             document.querySelectorAll('.option').forEach(opt => {
                 opt.classList.remove('selected');
-                opt.style.pointerEvents = 'auto';
             });
             
             // Marcar nueva selección
@@ -230,186 +408,80 @@
             
             // Habilitar botón de confirmar
             document.getElementById('submitBtn').disabled = false;
-            
-            // Efecto de confirmación visual
-            document.getElementById('submitBtn').style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
             document.getElementById('submitBtn').innerHTML = `✅ Confirmar: Opción ${option.toUpperCase()}`;
         }
-
-        // MEJORADA: Función para cargar pregunta
-        function loadQuestion() {
-            if (currentQuestion >= questions.length) {
-                endGame();
-                return;
-            }
-
-            const q = questions[currentQuestion];
-            document.getElementById('questionText').textContent = q.question;
-            document.getElementById('questionNumber').textContent = `Pregunta #${currentQuestion + 1}`;
-            document.getElementById('questionCounter').textContent = `Pregunta ${currentQuestion + 1}/${questions.length}`;
-
-            const options = document.querySelectorAll('.option');
-            options.forEach((opt, index) => {
-                const letter = String.fromCharCode(97 + index);
-                const contentDiv = opt.querySelector('.option-content');
-                contentDiv.textContent = `${letter.toUpperCase()}) ${q.options[index]}`;
-                
-                // Resetear clases
-                opt.className = `option option-${letter}`;
-                opt.onclick = () => selectOption(letter);
-                opt.style.pointerEvents = 'auto';
-                
-                // Remover estados anteriores
-                opt.classList.remove('correct-answer', 'incorrect-answer', 'selected', 'disabled');
-            });
-
-            // Resetear selección y botón
-            selectedOption = null;
-            document.getElementById('submitBtn').disabled = true;
-            document.getElementById('submitBtn').innerHTML = '✅ Confirmar Respuesta';
-            document.getElementById('submitBtn').style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
-            
-            resetTimer();
-        }
-
-        // MEJORADA: Función para enviar respuesta
-        async function submitAnswer() {
+        
+        function submitAnswer() {
             if (!selectedOption) return;
-
-            const q = questions[currentQuestion];
-            const isCorrect = selectedOption === q.correct;
-            const selectedElement = document.querySelector(`.option-${selectedOption}`);
-            const correctElement = document.querySelector(`.option-${q.correct}`);
-
+            
             // Deshabilitar todas las opciones
             document.querySelectorAll('.option').forEach(opt => {
                 opt.style.pointerEvents = 'none';
-                opt.classList.add('disabled');
             });
-
-            // Registrar respuesta en Firebase
-            await db.collection('games').doc(gameCode).collection('answers').add({
-                playerId: currentPlayer.id,
-                playerName: currentPlayer.name,
-                questionIndex: currentQuestion,
-                selectedOption: selectedOption,
-                isCorrect: isCorrect,
-                timestamp: new Date(),
-                points: isCorrect ? q.points : 0,
-                category: q.category
-            });
-
-            // Mostrar resultados visualmente
-            if (isCorrect) {
-                score += q.points;
-                selectedElement.classList.add('correct-answer');
-                showPointsAnimation(q.points);
+            
+            // Mostrar resultado (en demo, la B es correcta)
+            const correctAnswer = 'b';
+            const selectedElement = document.querySelector(`.option-${selectedOption}`);
+            const correctElement = document.querySelector(`.option-${correctAnswer}`);
+            
+            if (selectedOption === correctAnswer) {
+                selectedElement.style.background = 'linear-gradient(135deg, #27ae60, #229954)';
+                document.getElementById('submitBtn').innerHTML = '🎉 ¡Correcto! +100 puntos';
+                document.getElementById('submitBtn').style.background = 'linear-gradient(135deg, #27ae60, #229954)';
                 
                 // Actualizar puntuación
-                await db.collection('games').doc(gameCode).collection('players').doc(currentPlayer.id).update({
-                    score: score,
-                    lastAnswer: new Date(),
-                    lastQuestion: currentQuestion
-                });
+                const currentScore = document.getElementById('currentScore');
+                const newScore = parseInt(currentScore.textContent) + 100;
+                currentScore.textContent = newScore + ' puntos';
             } else {
-                selectedElement.classList.add('incorrect-answer');
-                correctElement.classList.add('correct-answer');
-            }
-
-            updateScore();
-            document.getElementById('submitBtn').disabled = true;
-
-            // Cambiar texto del botón según resultado
-            if (isCorrect) {
-                document.getElementById('submitBtn').innerHTML = '🎉 ¡Correcto!';
-                document.getElementById('submitBtn').style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
-            } else {
+                selectedElement.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+                correctElement.style.background = 'linear-gradient(135deg, #27ae60, #229954)';
                 document.getElementById('submitBtn').innerHTML = '❌ Incorrecto';
                 document.getElementById('submitBtn').style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
             }
-
-            // Mostrar ranking después de 3 segundos
-            setTimeout(() => {
-                showQuestionRanking();
-            }, 3000);
+            
+            document.getElementById('submitBtn').disabled = true;
+            clearInterval(demoInterval);
         }
-
-        // MEJORADA: Animación de puntos
-        function showPointsAnimation(points) {
-            const pointsDiv = document.createElement('div');
-            pointsDiv.textContent = `+${points} puntos!`;
-            pointsDiv.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                font-size: 52px;
-                font-weight: bold;
-                color: #f1c40f;
-                background: rgba(255,255,255,0.9);
-                padding: 20px 40px;
-                border-radius: 20px;
-                z-index: 1000;
-                animation: pointsFloat 2s ease-out;
-                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            `;
-            
-            document.body.appendChild(pointsDiv);
-            
-            setTimeout(() => {
-                pointsDiv.remove();
-            }, 2000);
-        }
-
-        // MEJORADA: CSS para animaciones
-        const improvedStyles = `
-            @keyframes pointsFloat {
-                0% { 
-                    transform: translate(-50%, -50%) scale(0.8); 
-                    opacity: 0; 
-                }
-                20% { 
-                    transform: translate(-50%, -60%) scale(1.2); 
-                    opacity: 1; 
-                }
-                80% { 
-                    transform: translate(-50%, -80%) scale(1.1); 
-                    opacity: 1; 
-                }
-                100% { 
-                    transform: translate(-50%, -100%) scale(1); 
-                    opacity: 0; 
-                }
-            }
-            
-            @keyframes correctGlow {
-                0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
-                50% { box-shadow: 0 0 0 15px rgba(46, 204, 113, 0.3); }
-                100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
-            }
-            
-            @keyframes incorrectShake {
-                0%, 100% { transform: translateX(0) scale(1.02); }
-                25% { transform: translateX(-10px) scale(1.02); }
-                75% { transform: translateX(10px) scale(1.02); }
-            }
-            
-            .correct-answer {
-                animation: correctGlow 1s ease !important;
-            }
-            
-            .incorrect-answer {
-                animation: incorrectShake 0.5s ease !important;
-            }
-        `;
         
-        // Agregar estilos mejorados
-        const styleSheet = document.createElement('style');
-        styleSheet.textContent = improvedStyles;
-        document.head.appendChild(styleSheet);
-
-        // ... el resto del código se mantiene igual ...
+        function startDemoTimer() {
+            demoTimeLeft = 30;
+            const timerProgress = document.getElementById('timerProgress');
+            const timeLeftText = document.getElementById('timeLeft');
+            
+            clearInterval(demoInterval);
+            
+            demoInterval = setInterval(() => {
+                demoTimeLeft--;
+                const progress = (demoTimeLeft / 30) * 100;
+                timerProgress.style.width = `${progress}%`;
+                timeLeftText.textContent = demoTimeLeft;
+                
+                // Cambiar color del timer
+                if (demoTimeLeft <= 10) {
+                    timerProgress.style.background = 'linear-gradient(90deg, #dc3545, #c82333)';
+                } else if (demoTimeLeft <= 20) {
+                    timerProgress.style.background = 'linear-gradient(90deg, #ffc107, #e0a800)';
+                }
+                
+                if (demoTimeLeft <= 0) {
+                    clearInterval(demoInterval);
+                    if (!selectedOption) {
+                        document.getElementById('submitBtn').innerHTML = '⏰ Tiempo agotado';
+                        document.getElementById('submitBtn').style.background = 'linear-gradient(135deg, #6c757d, #5a6268)';
+                        document.getElementById('submitBtn').disabled = true;
+                    }
+                }
+            }, 1000);
+        }
+        
+        // Inicializar demo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Precargar datos de demo
+            document.getElementById('studentName').value = 'María González';
+            document.getElementById('studentId').value = '2023001';
+            document.getElementById('gameCodeInput').value = 'KAH123';
+        });
     </script>
 </body>
 </html>
