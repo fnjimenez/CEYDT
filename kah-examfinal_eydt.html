@@ -7,107 +7,38 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .login-screen {
-            padding: 60px 40px;
-            text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .login-form {
-            max-width: 400px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            color: #333;
-        }
-
-        .login-form input {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        .login-form input:focus {
-            border-color: #667eea;
-            outline: none;
-        }
-
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin: 10px;
-        }
-
-        .btn-primary {
-            background: #3498db;
-            color: white;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .status-message {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .status-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .status-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .status-warning {
-            background: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
-        }
+        /* Todo el CSS anterior se mantiene igual */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #333; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); overflow: hidden; }
+        .login-screen { padding: 60px 40px; text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .login-form { max-width: 400px; margin: 0 auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); color: #333; }
+        .login-form input { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; transition: border-color 0.3s; }
+        .login-form input:focus { border-color: #667eea; outline: none; }
+        .btn { padding: 15px 30px; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; transition: all 0.3s; margin: 10px; }
+        .btn-primary { background: #3498db; color: white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .game-screen { display: none; min-height: 600px; }
+        .results-screen { display: none; padding: 40px; text-align: center; }
+        .header { background: #2c3e50; color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .player-info { display: flex; align-items: center; gap: 15px; }
+        .avatar { width: 50px; height: 50px; border-radius: 50%; background: #3498db; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; color: white; }
+        .score-display { font-size: 24px; font-weight: bold; color: #f1c40f; }
+        .question-container { padding: 40px; text-align: center; }
+        .question-text { font-size: 28px; font-weight: bold; color: #2c3e50; margin-bottom: 30px; line-height: 1.4; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto; }
+        .option { padding: 25px; border-radius: 15px; font-size: 18px; font-weight: bold; cursor: pointer; transition: all 0.3s; border: 3px solid transparent; color: white; text-align: center; }
+        .option:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .option-a { background: #e74c3c; }
+        .option-b { background: #3498db; }
+        .option-c { background: #2ecc71; }
+        .option-d { background: #f39c12; }
+        .timer-bar { height: 10px; background: #ecf0f1; margin: 20px 0; border-radius: 5px; overflow: hidden; }
+        .timer-progress { height: 100%; background: #e74c3c; width: 100%; transition: width 1s linear; }
+        .ranking { max-width: 600px; margin: 0 auto; }
+        .ranking-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; margin: 10px 0; background: #f8f9fa; border-radius: 10px; border-left: 5px solid #3498db; }
+        .final-score { font-size: 48px; font-weight: bold; color: #f1c40f; margin: 20px 0; }
+        .achievement { display: inline-block; background: #f1c40f; color: #2c3e50; padding: 10px 20px; margin: 5px; border-radius: 20px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -117,28 +48,68 @@
             <p class="subtitle">Demuestra tus conocimientos y compite con tus compañeros</p>
             
             <div class="login-form">
-                <h2>Configuración Inicial</h2>
-                
-                <div id="firebaseStatus" class="status-message status-warning">
-                    🔄 Inicializando Firebase...
-                </div>
-
-                <h3>Registro de Estudiante</h3>
+                <h2>Registro de Estudiante</h2>
                 <input type="text" id="studentName" placeholder="Tu nombre completo" maxlength="20">
                 <input type="text" id="studentId" placeholder="Matrícula" maxlength="10">
-                <button class="btn btn-primary" onclick="registerStudent()" id="startBtn" disabled>
-                    🔄 Inicializando...
-                </button>
+                <button class="btn btn-primary" onclick="registerStudent()">¡Comenzar Juego!</button>
+                <div id="firebaseStatus" style="margin-top: 15px; font-size: 12px; color: #666;"></div>
+            </div>
+        </div>
 
-                <div style="margin-top: 20px; font-size: 12px; color: #666;">
-                    <strong>Proyecto Firebase:</strong> evaluacionfinalcurso-f3f5b
+        <div class="game-screen" id="gameScreen">
+            <div class="header">
+                <div class="player-info">
+                    <div class="avatar" id="playerAvatar">U</div>
+                    <div>
+                        <div id="playerName">Estudiante</div>
+                        <div class="score-display" id="currentScore">0 puntos</div>
+                    </div>
                 </div>
+                <div class="question-counter" id="questionCounter">Pregunta 1/5</div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number" id="questionNumber">Pregunta #1</div>
+                <div class="question-text" id="questionText">Cargando pregunta...</div>
+                
+                <div class="timer-bar">
+                    <div class="timer-progress" id="timerProgress"></div>
+                </div>
+
+                <div class="options-grid">
+                    <div class="option option-a" onclick="selectOption('a')">A) Cargando...</div>
+                    <div class="option option-b" onclick="selectOption('b')">B) Cargando...</div>
+                    <div class="option option-c" onclick="selectOption('c')">C) Cargando...</div>
+                    <div class="option option-d" onclick="selectOption('d')">D) Cargando...</div>
+                </div>
+
+                <button class="btn btn-primary" id="submitBtn" onclick="submitAnswer()" disabled>Confirmar Respuesta</button>
+            </div>
+        </div>
+
+        <div class="results-screen" id="resultsScreen">
+            <div class="results-header">
+                <h1>🏆 ¡Juego Terminado!</h1>
+                <div class="final-score" id="finalScore">0 puntos</div>
+                <p id="performanceMessage">¡Excelente trabajo!</p>
+            </div>
+
+            <div class="achievements" id="achievementsContainer"></div>
+
+            <h2>🏅 Ranking de la Clase</h2>
+            <div class="ranking" id="rankingList">
+                <div class="ranking-item"><div>Cargando ranking...</div></div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <button class="btn btn-primary" onclick="restartGame()">Jugar Otra Vez</button>
+                <button class="btn btn-primary" onclick="showQuestionStats()">Ver Estadísticas</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 🔥 CONFIGURACIÓN FIREBASE - TU PROYECTO REAL
+        // ✅ USA TU CONFIGURACIÓN REAL DE FIREBASE
         const firebaseConfig = {
             apiKey: "AIzaSyDm385YCrTr_Ayzdkm6pSUC8BDtIz5aYys",
             authDomain: "evaluacionfinalcurso-f3f5b.firebaseapp.com",
@@ -149,108 +120,71 @@
             measurementId: "G-V3JZVEEFM4"
         };
 
-        // Variables globales
-        let db = null;
-        let firebaseInitialized = false;
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
-        // Función para inicializar Firebase
-        function initializeFirebase() {
-            try {
-                console.log("🔄 Inicializando Firebase...");
-                
-                // Verificar si Firebase está disponible
-                if (typeof firebase === 'undefined') {
-                    throw new Error("Firebase SDK no se cargó correctamente");
-                }
+        // Verificar conexión
+        db.collection('test').doc('connection').set({
+            timestamp: new Date(),
+            status: 'connected',
+            project: 'evaluacionfinalcurso-f3f5b'
+        }).then(() => {
+            document.getElementById('firebaseStatus').innerHTML = '✅ Firebase conectado correctamente a tu proyecto';
+        }).catch((error) => {
+            document.getElementById('firebaseStatus').innerHTML = '❌ Error: ' + error.message;
+        });
 
-                // Inicializar Firebase
-                firebase.initializeApp(firebaseConfig);
-                db = firebase.firestore();
-                
-                console.log("✅ Firebase App inicializada:", firebase.app().name);
-                
-                // Probar la conexión
-                testFirebaseConnection();
-                
-            } catch (error) {
-                console.error("❌ Error inicializando Firebase:", error);
-                updateStatus("❌ Error: " + error.message, "error");
-                document.getElementById('startBtn').disabled = true;
-                document.getElementById('startBtn').innerHTML = "❌ Error de Conexión";
+        // Variables del juego
+        let currentPlayer = {};
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedOption = null;
+        let timeLeft = 30;
+        let timerInterval;
+        let questions = [];
+
+        // Banco de preguntas completo
+        const questionBank = [
+            {
+                question: "¿Cuál de las siguientes áreas del IISE se enfoca en la disposición física de recursos?",
+                options: ["Work Design & Measurement", "Facilities Engineering & Energy Management", "Operations Research & Analysis", "Quality & Reliability Engineering"],
+                correct: "b",
+                points: 100,
+                category: "IISE_BOK"
+            },
+            {
+                question: "¿Qué área del IISE utiliza modelos matemáticos para optimizar sistemas?",
+                options: ["Engineering Economic Analysis", "Operations Research & Analysis", "Information Engineering", "Supply Chain Management"],
+                correct: "b",
+                points: 100,
+                category: "IISE_BOK"
+            },
+            {
+                question: "¿Quién es considerado el padre de la administración científica?",
+                options: ["Henry Gantt", "Frederick Taylor", "Frank Gilbreth", "Henry Ford"],
+                correct: "b",
+                points: 150,
+                category: "Fundamentos"
+            },
+            {
+                question: "¿Qué representa el Tiempo Estándar en estudio de tiempos?",
+                options: ["Tiempo promedio observado", "Tiempo que debería tomar una tarea", "Tiempo más rápido registrado", "Tiempo con descansos incluidos"],
+                correct: "b",
+                points: 200,
+                category: "Estudio_Tiempos"
+            },
+            {
+                question: "¿Qué técnica usa códigos predefinidos para analizar movimientos?",
+                options: ["Diagrama de flujo", "Diagrama bimanual", "MTM (Methods-Time Measurement)", "Estudio de tiempos con cronómetro"],
+                correct: "c",
+                points: 250,
+                category: "Herramientas"
             }
-        }
-
-        // Función para probar la conexión
-        async function testFirebaseConnection() {
-            try {
-                updateStatus("🔍 Probando conexión con Firestore...", "warning");
-                
-                // Intentar escribir un documento de prueba
-                await db.collection('connection_test').doc('test').set({
-                    timestamp: new Date(),
-                    status: 'connected',
-                    userAgent: navigator.userAgent
-                });
-                
-                console.log("✅ Escritura en Firestore exitosa");
-                
-                // Intentar leer el documento
-                const doc = await db.collection('connection_test').doc('test').get();
-                
-                if (doc.exists) {
-                    console.log("✅ Lectura de Firestore exitosa");
-                    updateStatus("✅ ¡Conectado a Firebase correctamente!", "success");
-                    firebaseInitialized = true;
-                    document.getElementById('startBtn').disabled = false;
-                    document.getElementById('startBtn').innerHTML = "🎮 ¡Comenzar Juego!";
-                } else {
-                    throw new Error("No se pudo leer el documento de prueba");
-                }
-                
-            } catch (error) {
-                console.error("❌ Error en prueba de conexión:", error);
-                
-                // Mostrar error específico
-                let errorMessage = "Error de conexión: ";
-                
-                if (error.code === 'permission-denied') {
-                    errorMessage += "Permisos denegados. Revisa las reglas de Firestore.";
-                } else if (error.code === 'unavailable') {
-                    errorMessage += "Servicio no disponible. Revisa tu conexión a internet.";
-                } else {
-                    errorMessage += error.message;
-                }
-                
-                updateStatus(errorMessage, "error");
-                document.getElementById('startBtn').disabled = true;
-                document.getElementById('startBtn').innerHTML = "❌ Error de Conexión";
-            }
-        }
-
-        // Función para actualizar el estado
-        function updateStatus(message, type) {
-            const statusElement = document.getElementById('firebaseStatus');
-            statusElement.textContent = message;
-            statusElement.className = 'status-message';
-            
-            if (type === 'success') {
-                statusElement.classList.add('status-success');
-            } else if (type === 'error') {
-                statusElement.classList.add('status-error');
-            } else if (type === 'warning') {
-                statusElement.classList.add('status-warning');
-            }
-            
-            console.log("Status:", message);
-        }
+        ];
 
         // Función para registrar estudiante
         async function registerStudent() {
-            if (!firebaseInitialized) {
-                alert("Firebase no está inicializado. Espera a que se complete la conexión.");
-                return;
-            }
-
             const name = document.getElementById('studentName').value;
             const id = document.getElementById('studentId').value;
 
@@ -259,66 +193,304 @@
                 return;
             }
 
-            try {
-                updateStatus("📝 Registrando estudiante...", "warning");
-                
-                const studentData = {
-                    name: name,
-                    id: id,
-                    avatar: name.charAt(0).toUpperCase(),
-                    score: 0,
-                    startTime: new Date(),
-                    completed: false,
-                    registeredAt: new Date()
-                };
+            currentPlayer = {
+                name: name,
+                id: id,
+                avatar: name.charAt(0).toUpperCase(),
+                score: 0,
+                startTime: new Date(),
+                completed: false
+            };
 
+            try {
                 // Guardar en Firebase
-                await db.collection('players').doc(id).set(studentData);
+                await db.collection('players').doc(id).set(currentPlayer);
                 
-                updateStatus("✅ Estudiante registrado correctamente", "success");
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('gameScreen').style.display = 'block';
                 
-                // Redirigir al juego después de 1 segundo
-                setTimeout(() => {
-                    startGame(studentData);
-                }, 1000);
+                document.getElementById('playerName').textContent = name;
+                document.getElementById('playerAvatar').textContent = currentPlayer.avatar;
+                
+                questions = [...questionBank].sort(() => Math.random() - 0.5);
+                loadQuestion();
                 
             } catch (error) {
-                console.error("Error registrando estudiante:", error);
-                updateStatus("❌ Error al registrar: " + error.message, "error");
+                alert('Error al registrar: ' + error.message);
             }
         }
 
-        // Función para iniciar el juego (simplificada por ahora)
-        function startGame(studentData) {
-            alert(`¡Bienvenido ${studentData.name}!\n\nEl juego comenzará ahora.\n\nEsta es una versión de prueba. El juego completo cargará a continuación.`);
-            
-            // Aquí cargarías la pantalla de juego completa
-            document.getElementById('loginScreen').innerHTML = `
-                <div style="padding: 60px; text-align: center;">
-                    <h1>🎮 Juego en Desarrollo</h1>
-                    <p>Estudiante: ${studentData.name}</p>
-                    <p>Matrícula: ${studentData.id}</p>
-                    <div class="status-message status-success">
-                        ✅ Conexión a Firebase establecida correctamente
-                    </div>
-                    <button class="btn btn-primary" onclick="location.reload()">
-                        Reiniciar Aplicación
-                    </button>
-                </div>
-            `;
+        // Cargar pregunta
+        function loadQuestion() {
+            if (currentQuestion >= questions.length) {
+                endGame();
+                return;
+            }
+
+            const q = questions[currentQuestion];
+            document.getElementById('questionText').textContent = q.question;
+            document.getElementById('questionNumber').textContent = `Pregunta #${currentQuestion + 1}`;
+            document.getElementById('questionCounter').textContent = `Pregunta ${currentQuestion + 1}/${questions.length}`;
+
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, index) => {
+                const letter = String.fromCharCode(97 + index);
+                opt.textContent = `${letter.toUpperCase()}) ${q.options[index]}`;
+                opt.className = `option option-${letter}`;
+                opt.onclick = () => selectOption(letter);
+                opt.style.pointerEvents = 'auto';
+            });
+
+            selectedOption = null;
+            document.getElementById('submitBtn').disabled = true;
+            resetTimer();
         }
 
-        // Inicializar cuando la página cargue
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("📄 Página cargada, inicializando Firebase...");
-            initializeFirebase();
-        });
+        // Seleccionar opción
+        function selectOption(option) {
+            selectedOption = option;
+            document.getElementById('submitBtn').disabled = false;
+            
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            document.querySelector(`.option-${option}`).classList.add('selected');
+        }
 
-        // Manejar errores globales
-        window.addEventListener('error', function(e) {
-            console.error("Error global:", e.error);
-            updateStatus("❌ Error en la aplicación: " + e.error.message, "error");
-        });
+        // Enviar respuesta
+        async function submitAnswer() {
+            if (!selectedOption) return;
+
+            const q = questions[currentQuestion];
+            const isCorrect = selectedOption === q.correct;
+            const optionElement = document.querySelector(`.option-${selectedOption}`);
+
+            // Registrar respuesta en Firebase
+            await db.collection('answers').add({
+                playerId: currentPlayer.id,
+                playerName: currentPlayer.name,
+                questionIndex: currentQuestion,
+                selectedOption: selectedOption,
+                isCorrect: isCorrect,
+                timestamp: new Date(),
+                points: isCorrect ? q.points : 0
+            });
+
+            if (isCorrect) {
+                score += q.points;
+                optionElement.classList.add('correct-answer');
+                showPointsAnimation(q.points);
+            } else {
+                optionElement.classList.add('incorrect-answer');
+                document.querySelector(`.option-${q.correct}`).classList.add('correct-answer');
+            }
+
+            updateScore();
+            
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            document.getElementById('submitBtn').disabled = true;
+
+            setTimeout(() => {
+                currentQuestion++;
+                loadQuestion();
+            }, 2000);
+        }
+
+        // Animación de puntos
+        function showPointsAnimation(points) {
+            const pointsDiv = document.createElement('div');
+            pointsDiv.textContent = `+${points}`;
+            pointsDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 48px;
+                font-weight: bold;
+                color: #27ae60;
+                z-index: 1000;
+                animation: floatUp 1s ease-out;
+            `;
+            
+            document.body.appendChild(pointsDiv);
+            
+            setTimeout(() => {
+                pointsDiv.remove();
+            }, 1000);
+        }
+
+        // Actualizar puntuación
+        async function updateScore() {
+            document.getElementById('currentScore').textContent = `${score} puntos`;
+            currentPlayer.score = score;
+            
+            await db.collection('players').doc(currentPlayer.id).update({
+                score: score,
+                lastUpdate: new Date()
+            });
+        }
+
+        // Timer
+        function resetTimer() {
+            timeLeft = 30;
+            clearInterval(timerInterval);
+            
+            const timerProgress = document.getElementById('timerProgress');
+            timerProgress.style.width = '100%';
+            timerProgress.style.background = '#2ecc71';
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const progress = (timeLeft / 30) * 100;
+                timerProgress.style.width = `${progress}%`;
+                
+                if (timeLeft <= 10) {
+                    timerProgress.style.background = '#e74c3c';
+                } else if (timeLeft <= 20) {
+                    timerProgress.style.background = '#f39c12';
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    selectedOption = null;
+                    submitAnswer();
+                }
+            }, 1000);
+        }
+
+        // Finalizar juego
+        async function endGame() {
+            clearInterval(timerInterval);
+            
+            await db.collection('players').doc(currentPlayer.id).update({
+                finalScore: score,
+                endTime: new Date(),
+                completed: true
+            });
+
+            document.getElementById('gameScreen').style.display = 'none';
+            document.getElementById('resultsScreen').style.display = 'block';
+            
+            document.getElementById('finalScore').textContent = `${score} puntos`;
+            showPerformanceMessage();
+            showAchievements();
+            loadRanking();
+        }
+
+        // Mensaje de desempeño
+        function showPerformanceMessage() {
+            const percentage = (score / (questions.length * 100)) * 100;
+            let message = '';
+            
+            if (percentage >= 90) message = '🏆 ¡Excelente! Eres un experto en Estudio del Trabajo';
+            else if (percentage >= 70) message = '🎯 ¡Muy bien! Tienes buenos conocimientos';
+            else if (percentage >= 50) message = '👍 Buen esfuerzo, sigue practicando';
+            else message = '💪 Sigue estudiando, lo lograrás';
+            
+            document.getElementById('performanceMessage').textContent = message;
+        }
+
+        // Mostrar logros
+        function showAchievements() {
+            const achievements = document.getElementById('achievementsContainer');
+            achievements.innerHTML = '';
+            
+            const percentage = (score / (questions.length * 100)) * 100;
+            
+            if (percentage >= 90) {
+                achievements.innerHTML += '<div class="achievement">🏅 Experto en IISE</div>';
+            }
+            if (percentage >= 80) {
+                achievements.innerHTML += '<div class="achievement">⚡ Velocidad de Respuesta</div>';
+            }
+            if (score >= 1000) {
+                achievements.innerHTML += '<div class="achievement">🌟 Puntuación Alta</div>';
+            }
+        }
+
+        // Cargar ranking
+        function loadRanking() {
+            db.collection('players')
+                .where('completed', '==', true)
+                .orderBy('finalScore', 'desc')
+                .limit(10)
+                .get()
+                .then(snapshot => {
+                    const ranking = document.getElementById('rankingList');
+                    ranking.innerHTML = '';
+                    
+                    let position = 1;
+                    snapshot.forEach(doc => {
+                        const player = doc.data();
+                        const item = document.createElement('div');
+                        item.className = 'ranking-item';
+                        
+                        let medal = '';
+                        if (position === 1) medal = '🥇';
+                        else if (position === 2) medal = '🥈';
+                        else if (position === 3) medal = '🥉';
+                        
+                        item.innerHTML = `
+                            <div style="font-weight: bold; font-size: 20px; color: #2c3e50;">${medal} ${position}</div>
+                            <div style="flex: 1; text-align: left; margin-left: 15px; font-size: 18px;">${player.name}</div>
+                            <div style="font-weight: bold; color: #27ae60; font-size: 20px;">${player.finalScore} pts</div>
+                        `;
+                        
+                        if (player.id === currentPlayer.id) {
+                            item.style.background = '#e3f2fd';
+                            item.style.borderLeftColor = '#2196f3';
+                        }
+                        
+                        ranking.appendChild(item);
+                        position++;
+                    });
+                });
+        }
+
+        function showQuestionStats() {
+            alert('Las estadísticas se están guardando en tu base de datos de Firebase.');
+        }
+
+        // Reiniciar juego
+        function restartGame() {
+            currentQuestion = 0;
+            score = 0;
+            selectedOption = null;
+            
+            document.getElementById('resultsScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+            
+            questions = [...questionBank].sort(() => Math.random() - 0.5);
+            loadQuestion();
+            updateScore();
+        }
+
+        // CSS para animación
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+                100% { transform: translate(-50%, -100px) scale(1.5); opacity: 0; }
+            }
+            @keyframes correctAnswer {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+            @keyframes incorrectAnswer {
+                0% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                50% { transform: translateX(10px); }
+                75% { transform: translateX(-10px); }
+                100% { transform: translateX(0); }
+            }
+            .correct-answer { animation: correctAnswer 0.5s ease; background: #27ae60 !important; }
+            .incorrect-answer { animation: incorrectAnswer 0.5s ease; background: #e74c3c !important; }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
