@@ -11,14 +11,25 @@
         body { background: #46178f; color: #333; min-height: 100vh; padding: 20px; }
         .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 15px; overflow: hidden; }
         
+        /* Pantallas */
+        .screen { display: none; }
+        .active { display: block; }
+        
         /* Login Screen */
         .login-screen { padding: 40px; text-align: center; background: #46178f; color: white; }
         .login-form { max-width: 400px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; color: #333; }
         .login-form input { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
         .login-form input:focus { border-color: #46178f; outline: none; }
         
+        /* Moderador Screen */
+        .moderator-screen { padding: 30px; text-align: center; }
+        .game-code { font-size: 48px; font-weight: bold; color: #46178f; margin: 20px 0; letter-spacing: 5px; }
+        .players-waiting { max-width: 600px; margin: 20px auto; }
+        .player-card { display: inline-block; background: #f0f0f0; padding: 15px; margin: 10px; border-radius: 10px; text-align: center; min-width: 120px; }
+        .player-avatar { width: 50px; height: 50px; border-radius: 50%; background: #ffcd00; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #46178f; }
+        
         /* Game Screen */
-        .game-screen { display: none; }
+        .game-screen {  }
         .header { background: #46178f; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
         .player-info { display: flex; align-items: center; gap: 10px; }
         .avatar { width: 40px; height: 40px; border-radius: 50%; background: #ffcd00; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #46178f; }
@@ -40,6 +51,8 @@
         .option.selected { border-color: white; box-shadow: 0 0 10px rgba(255,255,255,0.5); }
         
         .btn { padding: 12px 30px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin: 10px; background: #46178f; color: white; }
+        .btn-success { background: #27ae60; }
+        .btn-danger { background: #e74c3c; }
         .btn:disabled { background: #ccc; cursor: not-allowed; }
         
         .correct-answer { background: #27ae60 !important; }
@@ -49,25 +62,44 @@
 <body>
     <div class="container">
         <!-- Pantalla de Login -->
-        <div class="login-screen" id="loginScreen">
+        <div class="screen login-screen active" id="loginScreen">
             <h1>🎯 Kahoot - Estudio del Trabajo</h1>
             <p>Demuestra tus conocimientos y compite con tus compañeros</p>
             
             <div class="login-form">
-                <h2>Registro de Estudiante</h2>
-                <input type="text" id="studentName" placeholder="Tu nombre completo" value="Juan Pérez">
-                <input type="text" id="studentId" placeholder="Matrícula" value="2024001">
-                <button class="btn" onclick="startDemo()">¡Comenzar Juego!</button>
+                <h2>Unirse al Juego</h2>
+                <input type="text" id="gameCodeInput" placeholder="Código del juego" value="KAH123">
+                <input type="text" id="studentName" placeholder="Tu nombre completo" value="FAUSTO NOE JIMENEZ">
+                <input type="text" id="studentId" placeholder="Matrícula" value="1665">
+                <button class="btn" onclick="joinAsStudent()" style="width: 100%; margin: 10px 0;">🎮 UNIRSE AL JUEGO</button>
+                <button class="btn btn-success" onclick="joinAsModerator()" style="width: 100%;">👨‍🏫 SOY EL MODERADOR</button>
             </div>
         </div>
 
+        <!-- Pantalla de Moderador -->
+        <div class="screen moderator-screen" id="moderatorScreen">
+            <h1>👨‍🏫 Panel de Moderador</h1>
+            <p>Comparte este código con los estudiantes:</p>
+            <div class="game-code" id="moderatorGameCode">KAH123</div>
+            
+            <div class="players-waiting">
+                <h3>Jugadores en espera: <span id="playersCount">0</span></h3>
+                <div id="playersList">
+                    <!-- Jugadores aparecerán aquí -->
+                </div>
+            </div>
+            
+            <button class="btn btn-success" onclick="startGame()" id="startBtn">🎮 INICIAR JUEGO</button>
+            <button class="btn btn-danger" onclick="backToLogin()">← VOLVER</button>
+        </div>
+
         <!-- Pantalla de Juego -->
-        <div class="game-screen" id="gameScreen">
+        <div class="screen game-screen" id="gameScreen">
             <div class="header">
                 <div class="player-info">
-                    <div class="avatar" id="playerAvatar">J</div>
+                    <div class="avatar" id="playerAvatar">F</div>
                     <div>
-                        <div id="playerName">Estudiante</div>
+                        <div id="playerName">FAUSTO NOE JIMENEZ</div>
                         <div class="score-display" id="currentScore">0 puntos</div>
                     </div>
                 </div>
@@ -75,17 +107,17 @@
             </div>
 
             <div class="question-container">
-                <div class="question-text" id="questionText">Cargando pregunta...</div>
+                <div class="question-text" id="questionText">¿Qué área del IISE se enfoca en el diseño de estaciones de trabajo?</div>
                 
                 <div class="timer-bar">
                     <div class="timer-progress" id="timerProgress"></div>
                 </div>
 
                 <div class="options-grid">
-                    <div class="option option-a" onclick="selectOption('a')">A) Cargando...</div>
-                    <div class="option option-b" onclick="selectOption('b')">B) Cargando...</div>
-                    <div class="option option-c" onclick="selectOption('c')">C) Cargando...</div>
-                    <div class="option option-d" onclick="selectOption('d')">D) Cargando...</div>
+                    <div class="option option-a" onclick="selectOption('a')">A) Facilities Engineering</div>
+                    <div class="option option-b" onclick="selectOption('b')">B) Work Design & Measurement</div>
+                    <div class="option option-c" onclick="selectOption('c')">C) Operations Research</div>
+                    <div class="option option-d" onclick="selectOption('d')">D) Quality Engineering</div>
                 </div>
 
                 <button class="btn" id="submitBtn" onclick="submitAnswer()" disabled>Confirmar Respuesta</button>
@@ -94,7 +126,7 @@
     </div>
 
     <script>
-        // Banco de preguntas simple para demo
+        // Banco de preguntas
         const questionBank = [
             {
                 question: "¿Qué área del IISE se enfoca en el diseño de estaciones de trabajo?",
@@ -128,24 +160,91 @@
             }
         ];
 
+        // Variables del juego
         let currentQuestion = 0;
         let score = 0;
         let selectedOption = null;
         let timeLeft = 30;
         let timerInterval;
         let questions = [];
+        let isModerator = false;
 
-        function startDemo() {
+        // Función para unirse como estudiante
+        function joinAsStudent() {
             const name = document.getElementById('studentName').value;
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('gameScreen').style.display = 'block';
+            const code = document.getElementById('gameCodeInput').value;
+            
+            if (!name || !code) {
+                alert('Por favor ingresa tu nombre y el código del juego');
+                return;
+            }
+            
+            document.getElementById('loginScreen').classList.remove('active');
+            document.getElementById('gameScreen').classList.add('active');
             document.getElementById('playerName').textContent = name;
             document.getElementById('playerAvatar').textContent = name.charAt(0).toUpperCase();
             
+            // Iniciar juego demo
             questions = [...questionBank];
             loadQuestion();
         }
 
+        // Función para unirse como moderador
+        function joinAsModerator() {
+            isModerator = true;
+            document.getElementById('loginScreen').classList.remove('active');
+            document.getElementById('moderatorScreen').classList.add('active');
+            
+            // Generar código de juego único
+            const gameCode = 'KAH' + Math.floor(100 + Math.random() * 900);
+            document.getElementById('moderatorGameCode').textContent = gameCode;
+            
+            // Simular jugadores conectados
+            simulateConnectedPlayers();
+        }
+
+        // Simular jugadores conectados (para demo)
+        function simulateConnectedPlayers() {
+            const demoPlayers = [
+                { name: 'MARIA GARCIA', avatar: 'M' },
+                { name: 'CARLOS LOPEZ', avatar: 'C' },
+                { name: 'ANA MARTINEZ', avatar: 'A' },
+                { name: 'LUIS RODRIGUEZ', avatar: 'L' }
+            ];
+            
+            const playersList = document.getElementById('playersList');
+            const playersCount = document.getElementById('playersCount');
+            
+            playersList.innerHTML = '';
+            demoPlayers.forEach(player => {
+                const playerCard = document.createElement('div');
+                playerCard.className = 'player-card';
+                playerCard.innerHTML = `
+                    <div class="player-avatar">${player.avatar}</div>
+                    <div>${player.name}</div>
+                `;
+                playersList.appendChild(playerCard);
+            });
+            
+            playersCount.textContent = demoPlayers.length;
+        }
+
+        // Función para iniciar el juego (moderador)
+        function startGame() {
+            alert('¡Juego iniciado! Todos los estudiantes comenzarán ahora.');
+            // En una versión real, aquí se enviaría una señal a todos los jugadores
+            backToLogin();
+        }
+
+        // Volver al login
+        function backToLogin() {
+            document.getElementById('moderatorScreen').classList.remove('active');
+            document.getElementById('gameScreen').classList.remove('active');
+            document.getElementById('loginScreen').classList.add('active');
+            isModerator = false;
+        }
+
+        // Funciones del juego
         function loadQuestion() {
             if (currentQuestion >= questions.length) {
                 endGame();
@@ -236,17 +335,16 @@
 
         function endGame() {
             clearInterval(timerInterval);
-            alert(`¡Juego terminado! Puntuación final: ${score} puntos`);
+            alert(`¡Juego terminado! Puntuación final: ${score} puntos\n¡Excelente trabajo Fausto!`);
             // Reiniciar juego
             currentQuestion = 0;
             score = 0;
-            document.getElementById('gameScreen').style.display = 'none';
-            document.getElementById('loginScreen').style.display = 'block';
+            backToLogin();
         }
 
-        // Inicializar con datos de demo
+        // Inicializar con datos de Fausto
         document.addEventListener('DOMContentLoaded', function() {
-            console.log("Kahoot cargado - listo para demo");
+            console.log("Kahoot cargado - listo para usar");
         });
     </script>
 </body>
