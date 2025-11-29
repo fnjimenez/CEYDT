@@ -12,28 +12,24 @@
         .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 15px; overflow: hidden; }
         
         /* Pantallas */
-        .screen { display: none; padding: 30px; }
+        .screen { display: none; }
         .active { display: block; }
         
         /* Login Screen */
-        .login-screen { text-align: center; background: #46178f; color: white; }
+        .login-screen { padding: 40px; text-align: center; background: #46178f; color: white; }
         .login-form { max-width: 400px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; color: #333; }
         .login-form input { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
         .login-form input:focus { border-color: #46178f; outline: none; }
         
         /* Moderador Screen */
-        .moderator-screen { text-align: center; }
+        .moderator-screen { padding: 30px; text-align: center; }
         .game-code { font-size: 48px; font-weight: bold; color: #46178f; margin: 20px 0; letter-spacing: 5px; }
         .players-waiting { max-width: 600px; margin: 20px auto; }
         .player-card { display: inline-block; background: #f0f0f0; padding: 15px; margin: 10px; border-radius: 10px; text-align: center; min-width: 120px; }
         .player-avatar { width: 50px; height: 50px; border-radius: 50%; background: #ffcd00; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #46178f; }
         
-        /* Waiting Screen (para estudiantes) */
-        .waiting-screen { text-align: center; background: #46178f; color: white; }
-        .waiting-code { font-size: 48px; font-weight: bold; color: #ffcd00; margin: 20px 0; letter-spacing: 5px; }
-        
         /* Game Screen */
-        .game-screen { padding: 0; }
+        .game-screen {  }
         .header { background: #46178f; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
         .player-info { display: flex; align-items: center; gap: 10px; }
         .avatar { width: 40px; height: 40px; border-radius: 50%; background: #ffcd00; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #46178f; }
@@ -93,30 +89,8 @@
                 </div>
             </div>
             
-            <button class="btn btn-success" onclick="startGameAsModerator()" id="startBtn">🎮 INICIAR JUEGO</button>
-            <button class="btn btn-danger" onclick="backToLogin()">← VOLVER AL LOGIN</button>
-        </div>
-
-        <!-- Pantalla de Espera para Estudiantes -->
-        <div class="screen waiting-screen" id="waitingScreen">
-            <h1>🎯 Kahoot - Estudio del Trabajo</h1>
-            <p>Esperando a que el moderador inicie el juego...</p>
-            <div class="waiting-code" id="waitingGameCode">KAH123</div>
-            
-            <div class="players-waiting">
-                <h3>Jugadores conectados: <span id="waitingPlayersCount">0</span></h3>
-                <div id="waitingPlayersList">
-                    <!-- Jugadores aparecerán aquí -->
-                </div>
-            </div>
-            
-            <div style="margin-top: 30px;">
-                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; display: inline-block;">
-                    🟡 Conectado - Esperando inicio del juego
-                </div>
-            </div>
-            
-            <button class="btn btn-danger" onclick="backToLogin()" style="margin-top: 20px;">← VOLVER AL LOGIN</button>
+            <button class="btn btn-success" onclick="startGame()" id="startBtn">🎮 INICIAR JUEGO</button>
+            <button class="btn btn-danger" onclick="backToLogin()">← VOLVER</button>
         </div>
 
         <!-- Pantalla de Juego -->
@@ -194,7 +168,6 @@
         let timerInterval;
         let questions = [];
         let isModerator = false;
-        let currentGameCode = '';
 
         // Función para unirse como estudiante
         function joinAsStudent() {
@@ -206,13 +179,14 @@
                 return;
             }
             
-            currentGameCode = code;
             document.getElementById('loginScreen').classList.remove('active');
-            document.getElementById('waitingScreen').classList.add('active');
-            document.getElementById('waitingGameCode').textContent = code;
+            document.getElementById('gameScreen').classList.add('active');
+            document.getElementById('playerName').textContent = name;
+            document.getElementById('playerAvatar').textContent = name.charAt(0).toUpperCase();
             
-            // Mostrar jugadores en espera
-            simulateWaitingPlayers();
+            // Iniciar juego demo
+            questions = [...questionBank];
+            loadQuestion();
         }
 
         // Función para unirse como moderador
@@ -222,14 +196,14 @@
             document.getElementById('moderatorScreen').classList.add('active');
             
             // Generar código de juego único
-            currentGameCode = 'KAH' + Math.floor(100 + Math.random() * 900);
-            document.getElementById('moderatorGameCode').textContent = currentGameCode;
+            const gameCode = 'KAH' + Math.floor(100 + Math.random() * 900);
+            document.getElementById('moderatorGameCode').textContent = gameCode;
             
             // Simular jugadores conectados
             simulateConnectedPlayers();
         }
 
-        // Simular jugadores conectados (para demo del moderador)
+        // Simular jugadores conectados (para demo)
         function simulateConnectedPlayers() {
             const demoPlayers = [
                 { name: 'MARIA GARCIA', avatar: 'M' },
@@ -255,73 +229,19 @@
             playersCount.textContent = demoPlayers.length;
         }
 
-        // Simular jugadores en espera (para demo de estudiantes)
-        function simulateWaitingPlayers() {
-            const demoPlayers = [
-                { name: 'FAUSTO JIMENEZ', avatar: 'F' },
-                { name: 'MARIA GARCIA', avatar: 'M' },
-                { name: 'CARLOS LOPEZ', avatar: 'C' },
-                { name: 'ANA MARTINEZ', avatar: 'A' },
-                { name: 'LUIS RODRIGUEZ', avatar: 'L' }
-            ];
-            
-            const playersList = document.getElementById('waitingPlayersList');
-            const playersCount = document.getElementById('waitingPlayersCount');
-            
-            playersList.innerHTML = '';
-            demoPlayers.forEach(player => {
-                const playerCard = document.createElement('div');
-                playerCard.className = 'player-card';
-                playerCard.innerHTML = `
-                    <div class="player-avatar">${player.avatar}</div>
-                    <div>${player.name}</div>
-                `;
-                playersList.appendChild(playerCard);
-            });
-            
-            playersCount.textContent = demoPlayers.length;
-        }
-
         // Función para iniciar el juego (moderador)
-        function startGameAsModerator() {
+        function startGame() {
             alert('¡Juego iniciado! Todos los estudiantes comenzarán ahora.');
-            
-            // El moderador también puede jugar
-            document.getElementById('moderatorScreen').classList.remove('active');
-            document.getElementById('gameScreen').classList.add('active');
-            document.getElementById('playerName').textContent = "MODERADOR";
-            document.getElementById('playerAvatar').textContent = "👨‍🏫";
-            
-            // Iniciar juego
-            questions = [...questionBank];
-            loadQuestion();
-        }
-
-        // Función para que estudiantes inicien juego (simulado)
-        function startGameAsStudent() {
-            const name = document.getElementById('studentName').value;
-            document.getElementById('waitingScreen').classList.remove('active');
-            document.getElementById('gameScreen').classList.add('active');
-            document.getElementById('playerName').textContent = name;
-            document.getElementById('playerAvatar').textContent = name.charAt(0).toUpperCase();
-            
-            // Iniciar juego
-            questions = [...questionBank];
-            loadQuestion();
+            // En una versión real, aquí se enviaría una señal a todos los jugadores
+            backToLogin();
         }
 
         // Volver al login
         function backToLogin() {
             document.getElementById('moderatorScreen').classList.remove('active');
-            document.getElementById('waitingScreen').classList.remove('active');
             document.getElementById('gameScreen').classList.remove('active');
             document.getElementById('loginScreen').classList.add('active');
             isModerator = false;
-            
-            // Resetear juego
-            currentQuestion = 0;
-            score = 0;
-            clearInterval(timerInterval);
         }
 
         // Funciones del juego
@@ -342,15 +262,10 @@
                 opt.className = `option option-${letter}`;
                 opt.onclick = () => selectOption(letter);
                 opt.style.pointerEvents = 'auto';
-                
-                // Remover clases de respuesta anterior
-                opt.classList.remove('correct-answer', 'incorrect-answer', 'selected');
             });
 
             selectedOption = null;
             document.getElementById('submitBtn').disabled = true;
-            document.getElementById('submitBtn').textContent = 'Confirmar Respuesta';
-            document.getElementById('submitBtn').style.background = '#46178f';
             resetTimer();
         }
 
@@ -375,13 +290,9 @@
             if (isCorrect) {
                 score += q.points;
                 optionElement.classList.add('correct-answer');
-                document.getElementById('submitBtn').textContent = '🎉 ¡Correcto! +' + q.points + ' puntos';
-                document.getElementById('submitBtn').style.background = '#27ae60';
             } else {
                 optionElement.classList.add('incorrect-answer');
                 document.querySelector(`.option-${q.correct}`).classList.add('correct-answer');
-                document.getElementById('submitBtn').textContent = '❌ Incorrecto';
-                document.getElementById('submitBtn').style.background = '#e74c3c';
             }
 
             document.getElementById('currentScore').textContent = `${score} puntos`;
@@ -424,22 +335,16 @@
 
         function endGame() {
             clearInterval(timerInterval);
-            alert(`¡Juego terminado! Puntuación final: ${score} puntos\n¡Excelente trabajo!`);
+            alert(`¡Juego terminado! Puntuación final: ${score} puntos\n¡Excelente trabajo Fausto!`);
+            // Reiniciar juego
+            currentQuestion = 0;
+            score = 0;
             backToLogin();
         }
 
-        // Simular inicio automático después de 5 segundos en espera (para demo)
-        setTimeout(() => {
-            if (document.getElementById('waitingScreen').classList.contains('active')) {
-                if (confirm('El moderador ha iniciado el juego. ¿Quieres unirte?')) {
-                    startGameAsStudent();
-                }
-            }
-        }, 5000);
-
         // Inicializar con datos de Fausto
         document.addEventListener('DOMContentLoaded', function() {
-            console.log("Kahoot cargado - Moderador incluido");
+            console.log("Kahoot cargado - listo para usar");
         });
     </script>
 </body>
