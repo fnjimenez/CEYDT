@@ -1,7 +1,9 @@
 <h1 id="estudio-y-diseño-de-trabajo-—-diagramas-de-proceso-y-de-operación-unidad-ii-consolidado">Estudio y Diseño de Trabajo — Diagramas de proceso y de operación (Unidad II, consolidado)</h1>
-<p><strong>Tema:</strong> 2.1 Diagramas de proceso (operación, flujo, recorrido) y 2.2 Diagramas de operación (bimanual, hombre-máquina, actividades múltiples) <strong>Cubre:</strong> Sesión 3 (Semana 3) y Sesión 4 (Semana 4), en un solo documento <strong>Propósito:</strong> Que el estudiante identifique la simbología, el formato y el uso de los seis diagramas de la Unidad II, sepa leer un diagrama ya elaborado y construya uno propio, como base directa de la <strong>Actividad 2: Elaboración de diagrama y cuadro comparativo</strong> (10 puntos, vence el 12 de octubre de 2026).</p>
+<p><strong>Tema:</strong> 2.1 Diagramas de proceso (operación, flujo, recorrido) y 2.2 Diagramas de operación (bimanual, hombre-máquina, actividades múltiples)<br>
+<strong>Cubre:</strong> Sesión 3 (Semana 3) y Sesión 4 (Semana 4), en un solo documento<br>
+<strong>Propósito:</strong> Que el estudiante identifique la simbología, el formato y el uso de los seis diagramas de la Unidad II, sepa leer un diagrama ya elaborado y construya uno propio, como base directa de la <strong>Actividad 2: Elaboración de diagrama y cuadro comparativo</strong> (10 puntos, vence el 12 de octubre de 2026).</p>
 <blockquote>
-<p><strong>Imágenes.</strong> Este documento usa imágenes de apoyo que se guardan en la carpeta <code>imagenes/</code> de la carpeta de EYDT del repositorio (junto a este archivo). Cada imagen aparece como <code>![texto](imagenes/nombre.png)</code>. Si todavía no subes una imagen, GitHub mostrará el texto alternativo y el recuadro “📷 Insertar aquí” que lo acompaña indica qué debe ir ahí. La sección 11 lista los nombres de archivo exactos.</p>
+<p><strong>Imágenes.</strong> Las imágenes de apoyo están en la carpeta <code>imagenes/</code> de este repositorio. La sección 11 lista los nombres de archivo.</p>
 </blockquote>
 <hr>
 <h2 id="índice">Índice</h2>
@@ -78,9 +80,6 @@
 <p>El DOP es el primer diagrama que se elabora al analizar un proceso, porque da una <strong>visión panorámica</strong> de él: qué se hace, en qué orden y con qué materiales (Kanawaty, 1996). Sirve para presentar el proceso a la dirección, comparar métodos alternativos de fabricar el mismo producto y decidir en qué operaciones conviene profundizar con otro diagrama.</p>
 <h3 id="cómo-se-lee">2.2 Cómo se lee</h3>
 <p><img src="https://claude.ai/chat/imagenes/04_dop_ejemplo_mesas_telefono_anotado.png" alt="DOP de mesas para teléfono, con las partes del diagrama señaladas"></p>
-<blockquote>
-<p>📷 <strong>Insertar aquí:</strong> <code>imagenes/04_dop_ejemplo_mesas_telefono_anotado.png</code>. DOP de la fabricación de mesas para teléfono, con las partes señaladas: subensambles que se incorporan a la línea principal, línea principal de flujo, materiales que entran en las operaciones 19 y 20, residuos de la operación 18 y cuadro resumen.</p>
-</blockquote>
 <p>Elementos que se leen en este tipo de diagrama:</p>
 <ul>
 <li><strong>Línea principal de flujo (vertical):</strong> la secuencia de operaciones e inspecciones del componente principal, de arriba hacia abajo.</li>
@@ -91,14 +90,8 @@
 <li><strong>Cuadro resumen:</strong> total de operaciones, inspecciones y tiempo.</li>
 </ul>
 <p><img src="https://claude.ai/chat/imagenes/06_dop_guia_lectura_lineas_y_simbolos.png" alt="Guía de lectura de las líneas y los símbolos de un DOP"></p>
-<blockquote>
-<p>📷 <strong>Insertar aquí:</strong> <code>imagenes/06_dop_guia_lectura_lineas_y_simbolos.png</code>. Guía gráfica de qué indica cada línea (suministro, subensamble, material sobre el que se transforma, residuo, línea principal).</p>
-</blockquote>
 <h3 id="ejemplo-con-formato-completo">2.3 Ejemplo con formato completo</h3>
 <p><img src="https://claude.ai/chat/imagenes/05_dop_ejemplo_abrelatas_niquelado.png" alt="DOP en formato completo: abrelatas niquelado"></p>
-<blockquote>
-<p>📷 <strong>Insertar aquí:</strong> <code>imagenes/05_dop_ejemplo_abrelatas_niquelado.png</code>. DOP en formato completo, con tabla de simbología, método analizado (actual o propuesto), estación de trabajo, resumen, y cuadro de revisiones, elaboró, revisó y aprobó.</p>
-</blockquote>
 <p>El formato completo incluye, además del dibujo:</p>
 <ul>
 <li>Simbología utilizada (operación, inspección, almacén, demora, transporte, operación combinada).</li>
@@ -170,9 +163,6 @@
 <p>Detectar desperdicios de tiempo y movimiento</p>
 <h3 id="formato">3.2 Formato</h3>
 <p><img src="https://claude.ai/chat/imagenes/07_formato_diagrama_flujo_proceso.png" alt="Formato en blanco del diagrama de flujo de proceso"></p>
-<blockquote>
-<p>📷 <strong>Insertar aquí:</strong> <code>imagenes/07_formato_diagrama_flujo_proceso.png</code>. Formato del diagrama de flujo de proceso, con el resumen (actual, propuesto, economía) y las columnas de descripción, cantidad, distancia, tiempo, símbolo y observaciones.</p>
-</blockquote>
 <p>Cómo se llena:</p>
 <ul>
 <li><strong>Objetivo y nivel de análisis:</strong> marca si el diagrama sigue al <strong>operario</strong>, al <strong>material</strong> o al <strong>equipo</strong>. Define a cuál sigues antes de empezar y no los mezcles.</li>
@@ -254,9 +244,6 @@
 <p>Traslada el diagrama de flujo a un <strong>plano a escala</strong> de la planta o estación. Muestra <strong>dónde</strong> ocurre cada evento y <strong>qué trayectoria</strong> sigue el material o el operario. Revela recorridos largos, cruces de rutas y retrocesos que una lista secuencial no deja ver. Es la herramienta principal para proponer una redistribución (Niebel &amp; Freivalds, 2009).</p>
 <h3 id="ejemplo">4.2 Ejemplo</h3>
 <p><img src="https://claude.ai/chat/imagenes/11_diagrama_recorrido_perforadora.png" alt="Diagrama de recorrido de una perforadora metálica manual"></p>
-<blockquote>
-<p>📷 <strong>Insertar aquí:</strong> <code>imagenes/11_diagrama_recorrido_perforadora.png</code>. Diagrama de recorrido sobre el layout: planta con almacenes, máquinas y mesas numeradas, ruta con flechas, símbolos de proceso en cada punto, flecha del norte, simbología, escala y cuadro de datos y firmas.</p>
-</blockquote>
 <p>Elementos que se ven en este diagrama:</p>
 <ul>
 <li><strong>Layout a escala</strong> con las áreas y los equipos numerados, y una <strong>lista de referencias</strong> (1. Almacén cartón, 2. Almacén vinil, 3. Cizalla, etc.).</li>
@@ -281,26 +268,17 @@
 <p>Se usa para operaciones <strong>manuales de ciclo corto y alta repetición</strong> (ensamble, empaque, costura). Se diagrama <strong>una sola operación</strong>, no el proceso completo. Su objetivo es que ambas manos trabajen de forma balanceada, sin esperas ni sostenimientos innecesarios (Niebel &amp; Freivalds, 2009).</p>
 <h3 id="ejemplo-anotado">5.2 Ejemplo anotado</h3>
 <p><img src="https://claude.ai/chat/imagenes/01_bimanual_ejemplo_anotado.png" alt="Diagrama bimanual: corte de tubos de vidrio, con sus partes señaladas"></p>
-<blockquote>
-<p>📷 <strong>Insertar aquí:</strong> <code>imagenes/01_bimanual_ejemplo_anotado.png</code>. Diagrama bimanual del corte de tubos de vidrio (método original), con las partes señaladas: datos generales del estudio, croquis de la estación, datos de la mano derecha, datos de la mano izquierda y resumen.</p>
-</blockquote>
 <p>Partes del formato:</p>
 <ul>
 <li><strong>Datos generales:</strong> nombre de la operación, dibujo y pieza, lugar, operario, quién lo compone y fecha.</li>
 <li><strong>Croquis de la estación de trabajo</strong> (disposición del lugar de trabajo), con la posición de la pieza, la herramienta y la plantilla.</li>
 <li><strong>Dos columnas de descripción:</strong> mano izquierda y mano derecha, con el mismo nivel de detalle y alineadas por renglón.</li>
 <li><strong>Columnas de símbolos</strong> para cada mano.</li>
-<li><strong>Resumen</strong> por mano, con el método <strong>actual</strong> y el <strong>propuesto</strong>: operaciones, transportes, esperas, sostenimientos, inspecciones y total. En el ejemplo, el método original tiene 14 eventos por mano, con 8 operaciones y 4 sostenimientos para la mano izquierda, y 5 operaciones, 5 transportes y 4 sostenimientos para la derecha.</li>
+<li><strong>Resumen</strong> por mano, con el método <strong>actual</strong> y el <strong>propuesto</strong>: operaciones, transportes, esperas, sostenimientos, inspecciones y total. En el ejemplo, el método original tiene 14 eventos por mano. La mano izquierda registra 8 operaciones, 2 transportes y 4 sostenimientos; la derecha, 5 operaciones, 5 transportes y 4 sostenimientos.</li>
 </ul>
 <h3 id="formatos-para-elaborar-el-tuyo">5.3 Formatos para elaborar el tuyo</h3>
 <p><img src="https://claude.ai/chat/imagenes/02_formato_bimanual_mano_derecha_izquierda.png" alt="Formato en blanco: diagrama mano derecha – mano izquierda"></p>
-<blockquote>
-<p>📷 <strong>Insertar aquí:</strong> <code>imagenes/02_formato_bimanual_mano_derecha_izquierda.png</code>. Formato en blanco del diagrama mano derecha – mano izquierda, con resumen por actividad (actual, propuesto), layout, columnas de símbolos y de therbligs, y total.</p>
-</blockquote>
 <p><img src="https://claude.ai/chat/imagenes/03_formato_proceso_del_operario.png" alt="Formato en blanco: diagrama de proceso del operario"></p>
-<blockquote>
-<p>📷 <strong>Insertar aquí:</strong> <code>imagenes/03_formato_proceso_del_operario.png</code>. Variante del formato, rotulada “Diagrama de proceso del operario”, con la misma estructura de dos manos y columna de therbligs.</p>
-</blockquote>
 <h3 id="reglas-para-construirlo">5.4 Reglas para construirlo</h3>
 <ol>
 <li>Diagrama <strong>una sola operación</strong> de ciclo corto, desde que las manos toman la pieza hasta que la sueltan.</li>
@@ -369,9 +347,6 @@
 </ul>
 <h3 id="simbología-y-formato">6.2 Simbología y formato</h3>
 <p><img src="https://claude.ai/chat/imagenes/10_simbologia_hombre_maquina.png" alt="Simbología del diagrama hombre-máquina"></p>
-<blockquote>
-<p>📷 <strong>Insertar aquí:</strong> <code>imagenes/10_simbologia_hombre_maquina.png</code>. Tabla de simbología para el operario y la máquina.</p>
-</blockquote>
 <p>Sombreado</p>
 <p>Operario</p>
 <p>Máquina</p>
@@ -400,14 +375,8 @@
 <p>Operario inactivo (tiempo muerto)</p>
 <p>Máquina inactiva (tiempo muerto)</p>
 <p><img src="https://claude.ai/chat/imagenes/09_formato_acoplamiento_hombre_maquina.png" alt="Formato en blanco: diagrama de acoplamiento hombre-máquina"></p>
-<blockquote>
-<p>📷 <strong>Insertar aquí:</strong> <code>imagenes/09_formato_acoplamiento_hombre_maquina.png</code>. Formato en blanco del diagrama de acoplamiento hombre-máquina, con número de operarios y de máquinas, simbología, layout y escala de tiempo central.</p>
-</blockquote>
 <h3 id="ejemplo-anotado-1">6.3 Ejemplo anotado</h3>
 <p><img src="https://claude.ai/chat/imagenes/08_hombre_maquina_ejemplo_anotado.png" alt="Ejemplo anotado de un diagrama hombre-máquina"></p>
-<blockquote>
-<p>📷 <strong>Insertar aquí:</strong> <code>imagenes/08_hombre_maquina_ejemplo_anotado.png</code>. Ejemplo (rectificado de una rosca interna), con las partes señaladas: información general del estudio, simbología y esquema de la estación de trabajo, representación gráfica del trabajo del operario, de la máquina, y análisis de tiempos muertos del equipo, del operario y del ciclo total.</p>
-</blockquote>
 <p>Cómo se lee:</p>
 <ul>
 <li><strong>Encabezado:</strong> objetivo, proceso analizado, método (actual o propuesto), número de operarios y de máquinas, quién elaboró y aprobó.</li>
