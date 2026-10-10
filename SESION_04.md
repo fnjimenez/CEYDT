@@ -4,7 +4,7 @@
 **Cubre:** Sesión 3 (Semana 3) y Sesión 4 (Semana 4), en un solo documento  
 **Propósito:** Que el estudiante identifique la simbología, el formato y el uso de los seis diagramas de la Unidad II, sepa leer un diagrama ya elaborado y construya uno propio, como base directa de la **Actividad 2: Elaboración de diagrama y cuadro comparativo** (10 puntos, vence el 12 de octubre de 2026).
 
-> **Imágenes.** Las imágenes de apoyo están en la carpeta `imagenes/` de este repositorio. La sección 11 lista los nombres de archivo.
+> **Imágenes.** Las imágenes de apoyo están en la carpeta `imagenes/` de este repositorio. La sección 12 lista los nombres de archivo.
 
 ---
 
@@ -18,11 +18,12 @@
 5. Diagrama bimanual (mano izquierda – mano derecha)
 6. Diagrama hombre-máquina
 7. Diagrama de actividades múltiples
-8. Cuadro comparativo de los seis diagramas
-9. Actividad en aula
-10. Cierre y vínculo con la Actividad 2
-11. Guía de imágenes para la carpeta de GitHub
-12. Referencias (formato APA)
+8. Convenciones, criterios de análisis y preguntas guía (Peralta)
+9. Cuadro comparativo de los seis diagramas
+10. Actividad en aula
+11. Cierre y vínculo con la Actividad 2
+12. Guía de imágenes para la carpeta de GitHub
+13. Referencias (formato APA)
 
 ---
 
@@ -60,6 +61,8 @@
 | D (semicírculo) | Demora o espera | La siguiente acción no puede ejecutarse de inmediato. |
 | ▽ Triángulo invertido | Almacenamiento | El objeto se guarda y se protege de un traslado no autorizado. |
 | ○ dentro de □ | Operación combinada | Operación e inspección simultáneas en el mismo punto. |
+
+Las descripciones del libro de Peralta para estos símbolos, con la diferencia entre espera necesaria e innecesaria, están en la sección 8.1.
 
 ### 1.2 Simbología del diagrama bimanual
 
@@ -393,7 +396,176 @@ Comparación de costos (costos **ilustrativos**: operario $80/h y máquina $150/
 
 ---
 
-## 8. Cuadro comparativo de los seis diagramas
+## 8. Convenciones, criterios de análisis y preguntas guía (Peralta)
+
+Esta sección resume, con redacción propia, las convenciones y tablas de apoyo del libro de Peralta ([año], completar) para cada diagrama. Las tablas del libro se basan en González (1985), Hall y Mundel (1978), Maynard (2001), Mundel (1978), Robinson (1991) y Geber (2000). Úsalas **antes** de construir (qué información debe llevar el formato) y **después** (qué preguntas hacerle al diagrama para proponer mejoras).
+
+### 8.1 Símbolos ASME en los diagramas de flujo de proceso (Tabla 2.5)
+
+Los mismos cinco símbolos se usan para seguir al **operario**, al **material** o al **equipo**. Esto matiza la sección 1.1:
+
+| Evento | Cuándo se usa |
+|---|---|
+| Operación (●) | Se modifica a propósito una característica dimensional, física, química, mecánica o estética de un material, información u objeto, o se une con otro. |
+| Transporte (➡) | El material, la información o el objeto pasa de un lugar a otro, sobre todo entre estaciones o áreas. **No** se cuentan los movimientos que forman parte de una operación y los hace el operario. |
+| Inspección (■) | Se evalúa a propósito alguna característica del material u objeto, normalmente al terminar una operación de transformación, un transporte, una demora o un almacenamiento. |
+| Espera (◗) | Puede ser de dos tipos: la **necesaria**, que permite cambiar intencionalmente una característica del material (por ejemplo, un secado), y la **innecesaria**, que interrumpe la continuidad y afecta a la operación siguiente. |
+| Almacenaje (▼) | El material, la información u objeto se resguarda, de manera intencional o no, en un área o recipiente específico, para someterlo después a otra operación. |
+
+**Para el análisis:** al contar demoras, distingue la espera necesaria de la innecesaria. Solo la segunda es desperdicio que se puede atacar.
+
+### 8.2 Convenciones gráficas del diagrama de flujo de proceso (Figura 2.6)
+
+| Convención | Cómo se dibuja o qué indica |
+|---|---|
+| Ensamble de dos componentes | Una línea de derivación **entra** a la operación desde un lado. |
+| Desensamble de dos componentes | Una línea de derivación **sale** de la operación hacia un lado. |
+| Cruce de dos líneas sin relación | Una de las líneas salta a la otra con un pequeño arco, para indicar que las operaciones no están relacionadas. |
+| Dos componentes con proceso similar | Se dibujan las dos columnas en paralelo, con los mismos símbolos. |
+| Pasos omitidos | Dos triángulos unidos por el vértice indican que se omitieron algunos pasos del proceso. |
+| Componente retornado a un proceso previo | Una línea con flecha regresa hacia arriba, al punto del proceso al que vuelve el componente. |
+
+### 8.3 Información básica que debe llevar cada diagrama
+
+Cada tabla del libro agrupa **qué contiene** el formato, **para qué sirve** y **qué ayuda a descubrir**.
+
+**Diagrama de operación del proceso (Tabla 2.15)**
+
+- **Contenido:** datos del proceso (nombre, departamento, parte, ensamble), fecha, nombre del analista, código del ensamble, número de parte o plano, descripción y cantidad de componentes, materias primas, subensambles y ensambles usados, descripción y cantidad de residuos, mermas y desperdicios, e índice de valor agregado de cada operación.
+- **Objetivos:** reducir el número de operaciones, definir la mejor disposición de las estaciones, identificar operaciones combinables, simplificar, balancear el trabajo de ambas manos, evitar que las manos sujeten objetos y dimensionar la estación y sus espacios.
+- **Ayuda a conocer:** la complejidad del proceso, el número preliminar de estaciones de trabajo, información para el layout de la estación y de la línea, puntos clave en operaciones críticas y el valor agregado que aporta el proceso.
+
+**Diagrama de flujo de proceso de material (Tabla 2.8) y de equipo (Tabla 2.9)**
+
+- **Contenido (ambos):** identificación del proceso, fecha, analista, método actual o propuesto, ubicación (planta, línea, estación), número del proceso, número de parte o plano, nivel de ingeniería, cantidad y descripción de las operaciones, tiempos, distancias de los desplazamientos, cantidades, notas, cantidad de desperdicios o mermas y tiempo acumulado.
+- **Objetivos (material):** reducir operaciones al mínimo, definir la mejor disposición de estaciones, identificar y combinar operaciones, simplificarlas, balancear el trabajo de las manos, eliminar la sujeción manual y cumplir la normatividad local de construcción, higiene, seguridad y protección civil.
+- **Objetivos (equipo):** reducir operaciones y costos, reducir el manejo y el movimiento de material, modificar la secuencia si baja el costo, diseñar traslados económicos, reducir el inventario en proceso y ubicar el mínimo de inspecciones en el mejor lugar.
+- **Ayuda a conocer:** **costos ocultos** por distancias recorridas, demoras y almacenes temporales. Como aspectos de control: que no se realice inspección y las inspecciones excesivas (en el de equipo, también la distribución de equipo y maquinaria).
+
+**Diagrama de recorrido (Tabla 2.11)**
+
+- **Contenido:** identificación del proceso, fecha, analista, código del ensamble, número de parte o plano, símbolos ASME y **líneas de flujo** que marcan el inicio y el final del recorrido.
+- **Objetivos:** reducir operaciones y manejo de material, definir la mejor disposición de las estaciones, reducir costos, movimientos de material e inventario en proceso, diseñar traslados económicos y ubicar bien las inspecciones.
+- **Ayuda a conocer:** costos ocultos por distancias recorridas, demoras y almacenes temporales.
+
+**Diagrama de proceso del operario y mano derecha – mano izquierda (Tabla 2.26)**
+
+- **Contenido:** condición que se analiza, fecha, analista, número de partes y modelos, nivel de notificación de cambios en la información de manufactura, movimientos que desequilibran la operación, balance de carga de trabajo en cada mano, distribución detallada de la estación (*layout*) y documentos de referencia.
+- **Objetivos:** evitar que las manos sujeten, que ambas trabajen de forma simultánea y equilibrada, que el trabajo se haga en el área normal, estandarizar el método, entrenar al operador, evitar que las manos "trabajen" cuando se puede, y eliminar, combinar o modificar la secuencia de *therbligs*.
+- **Ayuda a conocer:** actividades riesgosas con las manos, información para la hoja de instrucción, mejoras en los tiempos de ciclo, equipo y métodos de manejo de materiales, y la distribución detallada de la estación con alcances y movimientos más eficientes.
+
+### 8.4 Patrones de flujo de materiales (Figuras 2.9, 2.10 y 2.11)
+
+Sirven para **interpretar y proponer** el trazo del diagrama de recorrido.
+
+| Tipo | Patrones |
+|---|---|
+| Patrones básicos entre estaciones (Fig. 2.9) | **Recto**, **zig-zag**, en **U**, **circular** y **angular**. |
+| Patrones en el plano (Fig. 2.10) | Ingreso por la derecha y salida por la izquierda; ingreso por el costado frontal y salida por el extremo derecho; ingreso y salida por el mismo costado; ingreso por una esquina lateral izquierda y salida por la esquina inferior izquierda. |
+| Tipos de instalación (Fig. 2.11) | **Planta baja**, **múltiples niveles**, **pretiles** (flujo por niveles) y **combinada**. |
+
+**Para el análisis:** en tu recorrido, identifica qué patrón sigue el material. Un flujo en zig-zag con cruces suele indicar mala disposición y es candidato a proponer un flujo recto o en U.
+
+### 8.5 Therbligs para el diagrama mano derecha – mano izquierda
+
+El libro agrupa los *therbligs* (movimientos básicos, con su sigla) en familias. La columna THERBLIGS de los formatos de la sección 5 se llena con estas siglas.
+
+**Familia 1. Terminales** (Tabla 2.20)
+
+| Therblig | Sigla | Cuándo usarlo | Inicia | Termina |
+|---|---|---|---|---|
+| Sujetar | G | Para obtener el control de un objeto | Al tocarlo | Al tener el control |
+| Posicionar | P | Para alinear un objeto con otro, orientarlo o cambiar su posición | Al iniciar la alineación | Al concluir la alineación |
+| Pre-posicionar | PP | La alineación es previa al uso del objeto en otra actividad | Al iniciar la alineación | Al concluir la alineación |
+| Usar | U | Para manipular de forma controlada el objeto | Al manipularlo | Al cesar la manipulación |
+| Ensamblar | A | Para montar o ensamblar objetos | Al iniciar la unión | Al concluir la unión |
+| Desensamblar | DA | Para separar objetos | Al iniciar la separación | Al completar la separación |
+| Soltar material | RL | Para dejar de sujetar un objeto | Al dejar de tener el control | Al perder el control del objeto |
+
+**Familia 3. Movimientos titubeantes** (Tabla 2.22)
+
+| Therblig | Sigla | Cuándo usarlo | Inicia | Termina |
+|---|---|---|---|---|
+| Buscar | SH | Para ubicar un objeto | Al iniciar la búsqueda, sobre todo por el tacto | Al ubicar el objeto |
+| Seleccionar | S | Para localizar un objeto entre un conjunto | Al tocar varios objetos | Al localizar el objeto de interés |
+
+**Familia 4. Movimientos demorantes** (Tabla 2.23)
+
+| Therblig | Sigla | Cuándo usarlo | Inicia | Termina |
+|---|---|---|---|---|
+| Sostener | H | Para mantener un objeto fijo en una posición | Al cesar la manipulación y mantenerlo estático | Al realizar cualquier movimiento |
+| Demora inevitable | UD | La demora forma parte del método de trabajo | Cuando un miembro del cuerpo queda ocioso | Cuando ese miembro vuelve a trabajar |
+| Demora evitable | AD | Movimientos u ocio que no forman parte del método | Cuando un miembro no hace lo previsto por el método | Al volver a la rutina marcada por el método |
+| Reposo para reducir la fatiga | R | Para marcar paros que reducen la fatiga de una actividad previa | Cuando el miembro queda ocioso | Cuando puede volver a trabajar |
+
+**Familia 5. Movimientos ligados al razonamiento** (Tabla 2.24)
+
+| Therblig | Sigla | Cuándo usarlo | Inicia | Termina |
+|---|---|---|---|---|
+| Planear | PN | Para determinar un curso de acción | Con movimientos al azar u ocio de un miembro mientras el operario decide | Al determinar el curso de acción |
+| Verificar | I | Para comparar contra un patrón o especificaciones | Al iniciar el movimiento de palpar, manipular u observar un objeto | Al cesar la palpación, manipulación u observación |
+
+> **Nota:** el libro también tiene una **segunda familia** (movimientos de transporte). No está incluida aquí porque no se cuenta con esa tabla.
+
+**Relación con los símbolos de la sección 1.2:** el **sostenimiento** del formato bimanual corresponde al therblig **Sostener (H)**, y la **espera**, a las **demoras (UD y AD)**. Distinguir la demora inevitable de la evitable permite saber cuáles se pueden eliminar.
+
+### 8.6 Casos de análisis del diagrama de relaciones hombre-máquina (Tabla 2.30)
+
+| N.º | Caso de análisis | Se relaciona con |
+|---|---|---|
+| 1 | Un operario y un equipo o máquina semiautomática o automática | Diagrama hombre-máquina (sección 6) |
+| 2 | Un **grupo de trabajadores** y una máquina semiautomática o automática | Actividades múltiples (sección 7) |
+| 3 | Un operario y un **grupo de equipos o máquinas** | Actividades múltiples (sección 7) |
+| 4 | Una **cuadrilla** de trabajadores y un grupo de equipos o máquinas | Actividades múltiples (sección 7) |
+
+**Variantes de la actividad:** puede ser simple y cíclica; cíclica con subciclos que aparecen con relativa frecuencia; con variación de un ciclo a otro, o sin un ciclo o patrón definido. Tenlo presente antes de cronometrar, porque cambia cuántos ciclos conviene registrar.
+
+### 8.7 Preguntas guía para evaluar cada diagrama
+
+Después de construir el diagrama, hazle estas preguntas. Cada una apunta a **eliminar, combinar, reducir o simplificar**. Todas están resumidas del libro (Tablas 2.6, 2.10, 2.14, 2.25 y 2.31).
+
+**a) Diagrama de operación del proceso (Tabla 2.14)**
+
+| Acción | Preguntas |
+|---|---|
+| **Eliminar** | ¿Puede eliminarse una operación? Por innecesaria, cambiando la secuencia, el herramental o equipo, la distribución de la estación, combinando herramentales, modificando ligeramente los materiales o el diseño, o con un clamp de sujeción. ¿Puede eliminarse un movimiento? Por innecesario, cambiando la secuencia, combinando o cambiando herramentales, o con dispositivos que hagan que el material acabado caiga por gravedad en un contenedor. ¿Puede eliminarse la actividad de sujetar? Por innecesaria o con un dispositivo de sujeción. |
+| **Simplificar** | ¿Puede simplificarse una operación? Con mejores herramientas (más torque o velocidad), más brazo de palanca, cambiando la posición de controles y herramientas, mejores contenedores, gravedad e inercia, modificando ligeramente los materiales, reduciendo requerimientos individuales o bajando la altura del área de trabajo por debajo del codo. ¿Puede simplificarse un movimiento? Acortando distancias, cambiando la dirección, usando músculos distintos (dedos, muñeca, antebrazo, brazo, tronco), con movimientos continuos en lugar de bruscos o con dispositivos de caída por gravedad. |
+
+**b) Diagrama de flujo de proceso y de recorrido (Tablas 2.6 y 2.10)** (las preguntas son las mismas)
+
+| Acción | Preguntas |
+|---|---|
+| **Eliminar** | ¿Puede eliminarse una operación? Por innecesaria, instalando un nuevo equipo, cambiando el lugar donde se realiza, modificando la secuencia, el diseño del producto o servicio, o las especificaciones de los materiales y suministros. |
+| **Combinar** | ¿Puede combinarse con otra operación si se cambia la distribución de la estación, el equipo y la maquinaria, la secuencia, el diseño del producto o la especificación de los materiales? |
+| **Reducir** | ¿Pueden hacerse las operaciones más cortas o más fáciles de realizar? |
+| **Simplificar** | ¿Puede simplificarse cualquier operación? |
+
+Para qué se emplea: reducir operaciones, definir la mejor disposición de las estaciones, bajar costos para aumentar la rentabilidad, reducir manejo y movimientos de material, diseñar traslados económicos, reducir inventario en proceso y ubicar el mínimo de inspecciones en la mejor posición.
+
+**c) Diagrama mano derecha – mano izquierda (Tabla 2.25)**
+
+| Acción | Preguntas |
+|---|---|
+| **Eliminar** | ¿Pueden eliminarse barreras que obstruyen la visión, confusiones, filos cortantes de la pieza, el contraste de colores que quita la buena visibilidad, o longitudes de alcance y trayectos? |
+| **Combinar** | ¿Pueden combinarse movimientos con otros si se cambia la distribución de la estación, el equipo, herramienta y dispositivos, o la secuencia de los movimientos? |
+| **Reducir** | ¿Puede reducirse el riesgo de accidente facilitando la sujeción de un objeto? |
+| **Simplificar** | ¿Pueden simplificarse los dispositivos de sujeción, los contenedores de materiales, los puntos de referencia visibles, los dispositivos de inspección pasa-no pasa, el patrón de movimientos o la ubicación de componentes y herramientas en la estación? |
+
+Para qué se emplea: evitar el uso de las manos para sostener, procurar que ambas manos trabajen simultáneamente y equilibradas, estandarizar el método, entrenar al operador, evitar que las manos hagan trabajo que no es necesario, y eliminar, combinar o modificar la secuencia de *therbligs*.
+
+**d) Diagrama de relaciones hombre-máquina (Tabla 2.31)**
+
+Para qué se emplea: definir la mejor forma de que un operario lleve a cabo **múltiples actividades manuales** o **múltiples actividades en distintos equipos** (polivalencia) y eliminar los tiempos improductivos de operarios y equipos.
+
+| Acción | Preguntas |
+|---|---|
+| **Eliminar** | ¿Puede eliminarse una operación o un movimiento (por innecesario, por cambio de secuencia, herramental, distribución o diseño, o con un clamp)? ¿Puede eliminarse la actividad de sujetar? ¿Pueden eliminarse o reducirse las **demoras**: cambiando el miembro del cuerpo que trabaja, balanceando el trabajo entre miembros, trabajando en dos piezas a la vez o desfasando el trabajo de cada mano? ¿Pueden eliminarse las operaciones de **conteo o inspección**, o son necesarias? ¿Se duplican actividades o las puede hacer otra persona? |
+
+> **Nota:** esta tabla del libro continúa con las preguntas de combinar, reducir y simplificar, que aún no se incluyen aquí.
+
+---
+
+## 9. Cuadro comparativo de los seis diagramas
 
 | Diagrama | Qué registra | Formato | Pregunta que responde | Hallazgo típico |
 |---|---|---|---|---|
@@ -406,7 +578,7 @@ Comparación de costos (costos **ilustrativos**: operario $80/h y máquina $150/
 
 ---
 
-## 9. Actividad en aula (por realizarse)
+## 10. Actividad en aula (por realizarse)
 
 Esta actividad formativa **aún no se ha realizado** y sirve como insumo directo de la Actividad 2. Se trabaja en equipo con los formatos de este documento.
 
@@ -432,7 +604,7 @@ Esta actividad formativa **aún no se ha realizado** y sirve como insumo directo
 
 ---
 
-## 10. Cierre y vínculo con la Actividad 2
+## 11. Cierre y vínculo con la Actividad 2
 
 Los seis diagramas son insumo directo de la **Actividad 2: Elaboración de diagrama y cuadro comparativo** (10 puntos, vence el 12 de octubre de 2026): cada equipo construye un cuadro comparativo con un hallazgo y una oportunidad de mejora por cada diagrama, y cierra con una conclusión que señala qué mejora implementarían primero.
 
@@ -448,7 +620,7 @@ Los seis diagramas son insumo directo de la **Actividad 2: Elaboración de diagr
 
 ---
 
-## 11. Guía de imágenes para la carpeta de GitHub
+## 12. Guía de imágenes para la carpeta de GitHub
 
 Guarda estos archivos en la carpeta `imagenes/` dentro de la carpeta de EYDT, junto a este documento.
 
@@ -470,8 +642,10 @@ Guarda estos archivos en la carpeta `imagenes/` dentro de la carpeta de EYDT, ju
 
 ---
 
-## 12. Referencias (formato APA)
+## 13. Referencias (formato APA)
 
 Kanawaty, G. (Ed.). (1996). *Introducción al estudio del trabajo* (4.ª ed.). Oficina Internacional del Trabajo.
 
 Niebel, B. W., & Freivalds, A. (2009). *Ingeniería industrial: Métodos, estándares y diseño del trabajo* (12.ª ed.). McGraw-Hill Interamericana.
+
+Peralta, J. ([año]). *[Título del libro]* ([edición]). Editorial Patria. *(Completar los datos de la referencia.)*
