@@ -620,32 +620,10 @@ Los seis diagramas son insumo directo de la **Actividad 2: Elaboración de diagr
 
 ---
 
-## 12. Guía de imágenes para la carpeta de GitHub
-
-Guarda estos archivos en la carpeta `imagenes/` dentro de la carpeta de EYDT, junto a este documento.
-
-| Archivo | Qué contiene | Sección |
-|---|---|---|
-| `04_dop_ejemplo_mesas_telefono_anotado.png` | DOP de mesas para teléfono, con las partes señaladas | 2.2 |
-| `06_dop_guia_lectura_lineas_y_simbolos.png` | Guía de lectura de líneas y símbolos del DOP | 2.2 |
-| `05_dop_ejemplo_abrelatas_niquelado.png` | DOP en formato completo (abrelatas niquelado) | 2.3 |
-| `07_formato_diagrama_flujo_proceso.png` | Formato en blanco del diagrama de flujo de proceso | 3.2 |
-| `11_diagrama_recorrido_perforadora.png` | Diagrama de recorrido sobre layout | 4.2 |
-| `01_bimanual_ejemplo_anotado.png` | Bimanual: corte de tubos de vidrio, anotado | 5.2 |
-| `02_formato_bimanual_mano_derecha_izquierda.png` | Formato en blanco mano derecha – mano izquierda | 5.3 |
-| `03_formato_proceso_del_operario.png` | Formato en blanco "Diagrama de proceso del operario" | 5.3 |
-| `10_simbologia_hombre_maquina.png` | Simbología del diagrama hombre-máquina | 6.2 |
-| `09_formato_acoplamiento_hombre_maquina.png` | Formato en blanco de acoplamiento hombre-máquina | 6.2 |
-| `08_hombre_maquina_ejemplo_anotado.png` | Hombre-máquina: rectificado, anotado | 6.3 |
-
-> **Fuente de las imágenes:** [completar con el libro o material de origen y el año].
-
----
-
-## 13. Referencias (formato APA)
+## 12. Referencias (formato APA)
 
 Kanawaty, G. (Ed.). (1996). *Introducción al estudio del trabajo* (4.ª ed.). Oficina Internacional del Trabajo.
 
 Niebel, B. W., & Freivalds, A. (2009). *Ingeniería industrial: Métodos, estándares y diseño del trabajo* (12.ª ed.). McGraw-Hill Interamericana.
 
-Peralta, J. ([año]). *[Título del libro]* ([edición]). Editorial Patria. *(Completar los datos de la referencia.)*
+Peralta, J. (2013). *Estudio del trabajo. Una nueva visión*. Editorial Patria. 
